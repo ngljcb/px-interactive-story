@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# firebase configs
+firebaseConfig.js
+google-services.json
