@@ -1,10 +1,11 @@
-package com.sweng.InteractiveStory.entities;
+package com.sweng.InteractiveStory.entities.decisione;
 import com.sweng.InteractiveStory.entities.utils.Oggetto;
+import com.sweng.InteractiveStory.entities.Scenario;
 
 public class Opzione {
     Oggetto oggetto;
     String nome;
-    boolean sbloccato;
+    boolean sbloccato = false;
 
     public Opzione(Oggetto oggetto, String nome) {
         this.oggetto = oggetto;

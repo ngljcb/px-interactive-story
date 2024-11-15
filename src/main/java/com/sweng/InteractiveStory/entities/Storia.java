@@ -1,3 +1,4 @@
+package com.sweng.InteractiveStory.entities;
 import java.util.ArrayList;
 
 public class Storia {
