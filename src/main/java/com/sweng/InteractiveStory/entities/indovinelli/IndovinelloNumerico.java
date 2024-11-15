@@ -1,20 +1,24 @@
-public class IndovinelloNumerico implements Indovinello{
+package com.sweng.InteractiveStory.entities.indovinelli;
+import com.sweng.InteractiveStory.entities.decisione.Scelta;
+public class IndovinelloNumerico implements Indovinello, Scelta{
     private String testo;
     private int risposta;
     private int id;
 
-    public Indovinello(String testo, String risposta)
+    public IndovinelloNumerico(String testo, int risposta)
     {
         this.testo = testo;
         this.risposta = risposta;
     }
+
+    //todo implementare metodo goToScenario
 
     public String getTesto()
     {
         return this.testo;
     }
 
-    public String getRisposta()
+    public int getRisposta()
     {
         return this.risposta;
     }
@@ -31,7 +35,7 @@ public class IndovinelloNumerico implements Indovinello{
         this.risposta = risposta;
     }
 
-    public boolean verificaRispostaRisposta(int risposta) {
+    public boolean verificaRisposta(int risposta) {
         return this.risposta == risposta;
     }
 }

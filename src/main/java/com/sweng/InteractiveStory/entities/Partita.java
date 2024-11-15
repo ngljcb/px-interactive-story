@@ -1,5 +1,16 @@
+package com.sweng.InteractiveStory.entities;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import com.sweng.InteractiveStory.entities.Utenti.Giocatore;
+import com.sweng.InteractiveStory.entities.indovinelli.IndovinelloNumerico;
+import com.sweng.InteractiveStory.entities.Utenti.Utente;
+import com.sweng.InteractiveStory.entities.Scenario;
+import com.sweng.InteractiveStory.entities.decisione.Preferenza;
+import com.sweng.InteractiveStory.entities.decisione.Scelta;
+import com.sweng.InteractiveStory.entities.indovinelli.IndovinelloTestuale;
+import com.sweng.InteractiveStory.entities.utils.Inventario;
 
 public class Partita {
     Boolean stato;
@@ -11,13 +22,60 @@ public class Partita {
 
     public Partita(Utente giocatore, Storia storia) {
         this.stato = false;
-        this.dataInizio = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        this.dataInizio = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
         this.dataFine = null;
         this.giocatore = giocatore;
         this.storia = storia;
         oggetti = new Inventario();
     }
 
+    public Scenario attraversamentoScenario(Scenario scenarioAttuale, Scenario scenarioSuccessivo) {
+        System.out.println(scenarioAttuale.getDescrizione());
+        mostraScelta(scenarioAttuale);
+        boolean b = attendiRisposta(scenarioAttuale);
+        return esito(scenarioAttuale, scenarioSuccessivo, b);
+    }
+
+    public void mostraScelta(Scenario scenarioAttuale) {
+        if (scenarioAttuale.scelta instanceof Preferenza){
+            Preferenza preferenza = (Preferenza) scenarioAttuale.scelta;
+            System.out.println(preferenza.getDescrizione());
+            System.out.println("A: " + preferenza.getOpzione1().getNome());
+            System.out.println("B: " + preferenza.getOpzione2().getNome());
+        } else if (scenarioAttuale.scelta instanceof IndovinelloNumerico){
+            IndovinelloNumerico indovinello = (IndovinelloNumerico) scenarioAttuale.scelta;
+            System.out.println(indovinello.getTesto());
+
+        } else {
+            IndovinelloTestuale indovinello = (IndovinelloTestuale) scenarioAttuale.scelta;
+            System.out.println(indovinello.getTesto());
+        }
+    }
+
+    public boolean attendiRisposta(Scenario scenarioAttuale) {
+        Scanner scanner = new Scanner(System.in);
+        String risposta = scanner.nextLine();
+        scanner.close();
+        boolean esito = false;
+        if (scenarioAttuale.scelta instanceof IndovinelloNumerico){
+            IndovinelloNumerico indovinello = (IndovinelloNumerico) scenarioAttuale.scelta;
+            esito = indovinello.verificaRisposta(Integer.parseInt(risposta));
+
+        } else {
+            IndovinelloTestuale indovinello = (IndovinelloTestuale) scenarioAttuale.scelta;
+            esito = indovinello.verificaRisposta(risposta);
+        }
+        return esito;
+    }
+
+    public Scenario esito(Scenario scenarioAttuale, Scenario scenarioSuccessivo, boolean esito) {
+        if (esito){
+            Scelta scelta = scenarioAttuale.scelta;
+            return scelta.goToScenario(scenarioAttuale, scenarioSuccessivo);//scenariosuccessivo(?)
+        } else {
+           return scenarioAttuale;
+        }
+    }
     /**
      * attraversamento:
      *  per ogni scenario:
@@ -68,9 +126,5 @@ public class Partita {
     }
     
 
-    
-    //set/get giocatore
-    //set/get scenario
-    //set/get indovinello
 
 }

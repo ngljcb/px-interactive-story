@@ -1,3 +1,4 @@
+package com.sweng.InteractiveStory.entities.Utenti;
 public class Scrittore implements Utente
 {
     private String nome, password; // incapsulation

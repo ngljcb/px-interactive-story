@@ -1,4 +1,5 @@
-interface Utente
+package com.sweng.InteractiveStory.entities.Utenti;
+public interface Utente
 {
     String getNome();
     void setNome(String nome);

@@ -1,3 +1,4 @@
+package com.sweng.InteractiveStory.entities.Utenti;
 public class Visitatore implements Utente
 {
     private String nome, password; // incapsulation

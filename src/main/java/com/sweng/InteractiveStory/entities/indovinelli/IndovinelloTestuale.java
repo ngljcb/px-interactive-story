@@ -1,13 +1,19 @@
-public class IndovinelloTestuale implements Indovinello{
+package com.sweng.InteractiveStory.entities.indovinelli;
+
+import com.sweng.InteractiveStory.entities.decisione.Scelta;
+
+public class IndovinelloTestuale implements Indovinello, Scelta{
     private String testo;
     private String risposta;
     private int id;
 
-    public Indovinello(String testo, String risposta)
+    public IndovinelloTestuale(String testo, String risposta)
     {
         this.testo = testo;
         this.risposta = risposta; // dev'essere in minuscolo
     }
+
+    //todo implementare metodo goToScenario
 
     public String getTesto()
     {
@@ -37,7 +43,7 @@ public class IndovinelloTestuale implements Indovinello{
     }
 
     // verifica la risposta
-    public boolean verificaRispostaRisposta(String risposta) {
+    public boolean verificaRisposta(String risposta) {
         return risposta.equals(this.risposta);
     }
 }
