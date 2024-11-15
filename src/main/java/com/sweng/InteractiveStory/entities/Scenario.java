@@ -2,7 +2,7 @@
 
 public class Scenario {
     String descrizione;
-    String tipologia;
+    Scelta tipologia; // 
 
     public Scenario(String descrizione, String tipologia) {
         this.descrizione = descrizione;
