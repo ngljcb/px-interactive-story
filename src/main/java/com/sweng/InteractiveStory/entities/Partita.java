@@ -7,6 +7,7 @@ public class Partita {
     String dataFine;
     Utente giocatore;
     Storia storia;
+    Inventario oggetti;
 
     public Partita(Utente giocatore, Storia storia) {
         this.stato = false;
@@ -14,7 +15,18 @@ public class Partita {
         this.dataFine = null;
         this.giocatore = giocatore;
         this.storia = storia;
+        oggetti = new Inventario();
     }
+
+    /**
+     * attraversamento:
+     *  per ogni scenario:
+     *      mostra desc
+     *      mostra scelta (decisione / indovinello)
+     *      attende risposta
+     *      esito ( scenario attuale, A, B) 
+     */ 
+
     public Boolean getStato() {
         return stato;
     }
