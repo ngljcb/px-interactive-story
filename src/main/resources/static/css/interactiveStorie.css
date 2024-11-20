@@ -1,0 +1,79 @@
+/* Stili globali */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  /* Label del campo di testo */
+  .label-testo {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Campo di testo */
+  .campo-testo {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    font-size: 16px;
+    color: #555;
+    text-align: justify;
+    height: 150px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenitore bottoni */
+  .bottoni {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Stile dei bottoni */
+  .bottone {
+    background-color: #007BFF;
+    color: white;
+    font-size: 20px; /* Font più grande */
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px; /* Maggior padding */
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    width: 280px;
+    height:300px;
+  }
+  
+  .bottone:hover {
+    background-color: #0056b3;
+  }
+  
+  .bottone + .bottone {
+    background-color: #28a745;
+  }
+  
+  .bottone + .bottone:hover {
+    background-color: #218838;
+  }
+  
