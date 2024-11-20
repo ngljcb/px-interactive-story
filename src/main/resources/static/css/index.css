@@ -1,0 +1,60 @@
+/* Impostazioni generali */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+/* Contenitore principale */
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 10px;
+}
+
+/* Stile dei bottoni */
+/* Stile dei bottoni */
+.button {
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 30px 20px; /* Aumenta il padding verticale */
+    border-radius: 8px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    min-height: 100px; /* Altezza minima */
+}
+
+/* Colori distinti per ogni bottone */
+.button-1 {
+    background-color: #4caf50; /* Verde */
+    color: white;
+}
+
+.button-2 {
+    background-color: #2196f3; /* Blu */
+    color: white;
+}
+
+.button-3 {
+    background-color: #ff5722; /* Arancione */
+    color: white;
+}
+
+/* Effetti hover */
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
