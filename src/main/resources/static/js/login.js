@@ -1,31 +1,36 @@
+import { auth } from './firebaseConfig.js';
+import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+
 document.getElementById('loginForm').addEventListener('submit', function (e) {
   e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
+  console.log('Starting login process for email:', email);
+
+  // Autenticazione tramite Firebase
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      userCredential.user.getIdToken().then((idToken) => {
-        fetch('http://localhost:8080/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + idToken,
-          },
-          body: JSON.stringify({ email, password }),
-        }).then((response) => {
-          if (response.ok) {
-            alert('Login successful');
-            // Naviga alla home o a un'altra pagina
-          } else {
-            alert('Login failed');
-          }
-        });
-      });
+      console.log('Login successful!');
+      return userCredential.user.getIdToken(); // Ottiene il token JWT
+    })
+    .then((idToken) => {
+      console.log('Generated Token:', idToken); // Debug
+      alert('Login successful');
+      window.location.href = '/'; // Reindirizza alla pagina index
     })
     .catch((error) => {
-      alert(error.message);
+      console.error('Login Error:', error.message);
+
+      // Gestione degli errori di Firebase
+      if (error.code === 'auth/user-not-found') {
+        alert('No user found with this email.');
+      } else if (error.code === 'auth/wrong-password') {
+        alert('Incorrect password.');
+      } else if (error.code === 'auth/invalid-email') {
+        alert('Invalid email address.');
+      } else {
+        alert('Login failed: ' + error.message);
+      }
     });
 });

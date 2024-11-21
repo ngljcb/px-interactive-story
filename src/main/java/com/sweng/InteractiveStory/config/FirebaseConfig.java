@@ -14,13 +14,13 @@ public class FirebaseConfig {
 
     @Bean
     public FirebaseApp initializeFirebase() throws IOException {
-        FileInputStream serviceAccount =
-                new FileInputStream("src/main/resources/google-services.json");
+        FileInputStream serviceAccount = new FileInputStream("src/main/resources/google-services.json");
 
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
+        FirebaseOptions options = FirebaseOptions.builder()
+            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            .build();
 
         return FirebaseApp.initializeApp(options);
     }
 }
+
