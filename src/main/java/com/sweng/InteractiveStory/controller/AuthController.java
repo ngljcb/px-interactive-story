@@ -1,3 +1,5 @@
+package com.sweng.InteractiveStory.controller;
+
 import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

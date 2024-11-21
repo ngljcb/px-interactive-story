@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina con Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        .buttons button, .buttons input[type="submit"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Campo descrizione -->
+        <textarea placeholder="Inserisci qui il testo dello scenario..."></textarea>
+        
+        <!-- Campo testo scelta -->
+        <input type="text" placeholder="Inserisci qui il testo della scelta...">
+        
+        <!-- Caso preferenza -->
+        <div class="buttons" id="caso1">
+            <button type="button">Bottone 1</button>
+            <button type="button">Bottone 2</button>
+        </div>
+        
+        <!-- Caso indovinello -->
+        <div class="buttons" id="caso2" style="display: none;">
+            <input type="text" placeholder="Campo di testo indovinello...">
+            <button type="button">Invia</button>
+        </div>
+    </div>
+
+    <script src="../static/js/scenario.js"></script>
+</body>
+</html>
+
+
