@@ -3,33 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Campo di Testo e Bottoni</title>
+  <title>
+        Elenco storie
+  </title>
   <link rel="stylesheet" href="D:\Università\progettoSweng\InteractiveStory\src\main\resources\static\css\gioca_storia.css">
 </head>
 <body>
-  <div class="container-stories">
-    <h1>Elenco delle Storie</h1>
-    <div class="story-grid">
-
-        <!-- va fatto foreach -->
-
-        <div class="story-card"> 
-            <h2>Storia 1</h2>
-            <p>Nome storia 2</p>
-            <a href="storia1.html" class="story-button">Gioca</a>
-        </div>
-        <div class="story-card">
-            <h2>Storia 2</h2>
-            <p>Nome storia 1</p>
-            <a href="storia2.html" class="story-button">Gioca</a>
-        </div>
-        <div class="story-card">
-            <h2>Storia 3</h2>
-            <p>Nome storia 3</p>
-            <a href="storia3.html" class="story-button">Gioca</a>
-        </div>
+    <div class="container-stories">
+        <h1>
+            Elenco Storie disponibili
+        </h1>
+        <div id="story-grid" class="story-grid"></div>
+        <a href="index.html" class="back-button">
+            Torna alla Home
+        </a>
     </div>
-    <a href="index.html" class="back-button">Torna alla Home</a>
-</div>
+    <script src="D:\Università\progettoSweng\InteractiveStory\src\main\resources\static\js\elenco_storie_gioca.js"></script>
 </body>
 </html>
