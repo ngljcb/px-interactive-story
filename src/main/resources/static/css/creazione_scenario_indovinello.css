@@ -1,0 +1,117 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f8f8f8;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[disabled], textarea[disabled], select[disabled] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row > div {
+    flex: 1;
+}
+
+textarea {
+    font-family: Arial, sans-serif;
+    height: 100px;
+}
+
+select {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+input[type="text"], textarea, select {
+    margin-right: 10px;
+}
+
+/* Specific Styling for Indovinello Section */
+textarea#descrizione_indovinello {
+    background-color: #fcfcfc;
+    border: 1px solid #b6d7a8;
+}
+
+textarea#descrizione_indovinello:focus {
+    outline: 2px solid #6aa84f;
+    background-color: #f9fff5;
+}
+
+label[for="scenario_risposta_corretta"], 
+label[for="scenario_risposta_sbagliata"] {
+    margin-top: 10px;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}

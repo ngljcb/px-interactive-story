@@ -18,8 +18,7 @@ public class IndovinelloNumerico implements Indovinello, Scelta{
         return this.testo;
     }
 
-    public int getRisposta()
-    {
+    public int getRisposta() {
         return this.risposta;
     }
 
@@ -37,5 +36,9 @@ public class IndovinelloNumerico implements Indovinello, Scelta{
 
     public boolean verificaRisposta(int risposta) {
         return this.risposta == risposta;
+    }
+
+    public int stringToInteger(String input) {
+            return Integer.parseInt(input);
     }
 }
