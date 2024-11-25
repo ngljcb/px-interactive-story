@@ -1,16 +1,16 @@
-package com.sweng.InteractiveStory.entities;
+package com.sweng.InteractiveStory.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.sweng.InteractiveStory.entities.Utenti.Giocatore;
-import com.sweng.InteractiveStory.entities.indovinelli.IndovinelloNumerico;
-import com.sweng.InteractiveStory.entities.Utenti.Utente;
-import com.sweng.InteractiveStory.entities.Scenario;
-import com.sweng.InteractiveStory.entities.decisione.Preferenza;
-import com.sweng.InteractiveStory.entities.decisione.Scelta;
-import com.sweng.InteractiveStory.entities.indovinelli.IndovinelloTestuale;
-import com.sweng.InteractiveStory.entities.utils.Inventario;
+import com.sweng.InteractiveStory.entity.Scenario;
+import com.sweng.InteractiveStory.entity.decisione.Preferenza;
+import com.sweng.InteractiveStory.entity.decisione.Scelta;
+import com.sweng.InteractiveStory.entity.indovinelli.IndovinelloNumerico;
+import com.sweng.InteractiveStory.entity.indovinelli.IndovinelloTestuale;
+import com.sweng.InteractiveStory.entity.user.Giocatore;
+import com.sweng.InteractiveStory.entity.user.Utente;
+import com.sweng.InteractiveStory.entity.utils.Inventario;
 
 public class Partita {
     Boolean stato;

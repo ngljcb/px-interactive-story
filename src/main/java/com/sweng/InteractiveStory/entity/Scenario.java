@@ -1,5 +1,5 @@
-package com.sweng.InteractiveStory.entities;
-import com.sweng.InteractiveStory.entities.decisione.Scelta;
+package com.sweng.InteractiveStory.entity;
+import com.sweng.InteractiveStory.entity.decisione.Scelta;
 
 public class Scenario {
     String descrizione;

@@ -1,6 +1,6 @@
-package com.sweng.InteractiveStory.entities.decisione;
-import com.sweng.InteractiveStory.entities.utils.Oggetto;
-import com.sweng.InteractiveStory.entities.Scenario;
+package com.sweng.InteractiveStory.entity.decisione;
+import com.sweng.InteractiveStory.entity.Scenario;
+import com.sweng.InteractiveStory.entity.utils.Oggetto;
 
 public class Opzione {
     Oggetto oggetto;

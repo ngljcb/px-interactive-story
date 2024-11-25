@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.entities.decisione;
+package com.sweng.InteractiveStory.entity.decisione;
 public class Preferenza {
     private String descrizione;
     private Opzione opzione1;
