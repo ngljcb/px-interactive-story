@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.entities.indovinelli;
+package com.sweng.InteractiveStory.entity.indovinelli;
 interface Indovinello {
     String getTesto();
     String getRisposta();

@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.entities.utils;
+package com.sweng.InteractiveStory.entity.utils;
 public class Oggetto {
     String nome;
 

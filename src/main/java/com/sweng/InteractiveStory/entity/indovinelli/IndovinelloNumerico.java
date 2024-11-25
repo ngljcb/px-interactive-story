@@ -1,5 +1,5 @@
-package com.sweng.InteractiveStory.entities.indovinelli;
-import com.sweng.InteractiveStory.entities.decisione.Scelta;
+package com.sweng.InteractiveStory.entity.indovinelli;
+import com.sweng.InteractiveStory.entity.decisione.Scelta;
 public class IndovinelloNumerico implements Indovinello, Scelta{
     private String testo;
     private int risposta;
