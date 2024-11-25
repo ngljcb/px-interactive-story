@@ -1,59 +1,59 @@
 package com.sweng.InteractiveStory.controller;
 
-import com.google.firebase.auth.FirebaseAuthException;
+import com.sweng.InteractiveStory.dto.UserRequest;
+import com.sweng.InteractiveStory.service.FirebaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.sweng.InteractiveStory.service.AuthService;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
-    private AuthService authService;
+    private FirebaseService firebaseService;
 
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody RegisterRequest registerRequest) {
-        String email = registerRequest.getEmail();
-        String password = registerRequest.getPassword();
-
-        System.out.println("Received register request for email: " + email);
-
+    /**
+     * Endpoint per salvare i dati dell'utente su Firestore.
+     *
+     * @param userRequest Dati dell'utente da salvare
+     * @return Messaggio di conferma o errore
+     */
+    @PostMapping("/firestore")
+    public ResponseEntity<String> saveUserToFirestore(@RequestBody UserRequest userRequest) {
         try {
-            // Prova a registrare l'utente
-            String userId = authService.registerUser(email, password);
-            System.out.println("User registered successfully with UID: " + userId);
-            return ResponseEntity.ok("User registered successfully with UID: " + userId);
-        } catch (FirebaseAuthException e) {
-            System.err.println("FirebaseAuthException occurred: " + e.getMessage());
-            System.err.println("Error Code: " + e.getAuthErrorCode());
-
-            // Controlla se l'email esiste già
-            if (e.getAuthErrorCode().name().equals("EMAIL_ALREADY_EXISTS")) {
-                System.out.println("Email already registered: " + email);
-                return ResponseEntity.status(400).body("Error: The email is already registered.");
-            }
-
-            // Gestione per altri errori
-            return ResponseEntity.status(500).body("Error registering user: " + e.getMessage());
+            // Salva i dati su Firestore tramite FirebaseService
+            firebaseService.saveUser(
+                userRequest.getUid(),
+                userRequest.getEmail(),
+                userRequest.getUsername(),
+                userRequest.isStoryAdmin()
+            );
+            return ResponseEntity.ok("User data saved successfully to Firestore");
         } catch (Exception e) {
-            System.err.println("Unexpected exception occurred: " + e.getMessage());
-            return ResponseEntity.status(500).body("Unexpected error occurred: " + e.getMessage());
+            // Restituisce un messaggio di errore in caso di fallimento
+            return ResponseEntity.status(500).body("Error saving user data: " + e.getMessage());
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestHeader("Authorization") String token) {
-        System.out.println("Received Token: " + token); // Log per debug
+    /**
+     * Endpoint per verificare il funzionamento del controller e di FirebaseService (opzionale per debug).
+     *
+     * @param uid        UID dell'utente
+     * @param email      Email dell'utente
+     * @param username   Username dell'utente
+     * @param isStoryAdmin Flag per indicare se l'utente è uno story-admin
+     * @return Messaggio di successo o errore
+     */
+    @PostMapping("/test-save")
+    public ResponseEntity<String> testSave(@RequestParam String uid, @RequestParam String email,
+                                           @RequestParam String username, @RequestParam boolean isStoryAdmin) {
         try {
-            String userId = authService.verifyTokenAndGetUid(token);
-            System.out.println("Login successful. User ID: " + userId); // Debug
-            return ResponseEntity.ok("Login successful. User ID: " + userId);
+            // Chiamata di debug per testare il servizio
+            firebaseService.saveUser(uid, email, username, isStoryAdmin);
+            return ResponseEntity.ok("Test save: User data saved successfully to Firestore");
         } catch (Exception e) {
-            System.err.println("Login error: " + e.getMessage()); // Log l'errore
-            return ResponseEntity.status(401).body("Unauthorized: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error during test save: " + e.getMessage());
         }
     }
 }

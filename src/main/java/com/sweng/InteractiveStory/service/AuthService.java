@@ -4,21 +4,42 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.auth.UserRecord;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sweng.InteractiveStory.entity.user.Giocatore;
 
 @Service
 public class AuthService {
 
+    @Autowired
+    private FirebaseService firebaseService;
+
+    // Registra un nuovo utente
     public String registerUser(String email, String password) throws FirebaseAuthException {
         System.out.println("Attempting to register user with email: " + email); // Debug
         UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                 .setEmail(email)
                 .setPassword(password);
 
-        // Prova a creare un utente
+        // Creare un utente
         UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-        System.out.println("Firebase successfully created user with UID: " + userRecord.getUid());
-        return userRecord.getUid();
+
+        String uid = userRecord.getUid();
+        String username = email.split("@")[0]; // Default username
+        firebaseService.saveUser(uid, email, username, false); // Non è story-admin per default
+
+        System.out.println("User registered successfully and saved in Firestore.");
+        return uid;
+    }
+
+    public Giocatore getUserFromToken(String token) throws FirebaseAuthException {
+        // Verifica il token e recupera l'UID
+        String uid = verifyTokenAndGetUid(token);
+
+        // Recupera l'utente da Firestore
+        return firebaseService.getUser(uid);
     }
 
     public String verifyTokenAndGetUid(String token) throws FirebaseAuthException {
