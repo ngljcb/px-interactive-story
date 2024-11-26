@@ -12,25 +12,64 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log('Login successful!');
-      return userCredential.user.getIdToken(); // Ottiene il token JWT
+      const userId = userCredential.user.uid; // Ottieni l'ID dell'utente
+      const userEmail = userCredential.user.email;
+      console.log('User ID:', userId); // Debug
+      return userCredential.user.getIdToken().then((idToken) => ({ idToken, userId, userEmail })); // Ottieni il token JWT e l'ID
     })
-    .then((idToken) => {
+    .then(({ idToken, userId, userEmail }) => {
       console.log('Generated Token:', idToken); // Debug
+
+      // Effettua una chiamata per creare la sessione lato backend con idToken e uid
+      return fetch('/session/saveUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          username: userEmail.split('@')[0],
+          userId: userId,
+          idToken: idToken,
+        }),
+      });
+    })
+    .then((response) => {
+      if (!response.ok) {
+        return response.text().then((errorText) => {
+          throw new Error(errorText || 'Errore durante la creazione della sessione');
+        });
+      }
+      return response.text();
+    })
+    .then((message) => {
+      console.log('Backend response:', message);
       alert('Login successful');
-      window.location.href = '/'; // Reindirizza alla pagina index
+
+      // Controlla la query string per lo storyId
+      const urlParams = new URLSearchParams(window.location.search);
+      const storyId = urlParams.get('storyId');
+
+      if (storyId) {
+        // Se storyId è presente, reindirizza a /game con lo storyId come query string
+        window.location.href = `/game?storyId=${storyId}`;
+      } else {
+        // Altrimenti, reindirizza alla home
+        window.location.href = '/';
+      }
     })
     .catch((error) => {
       console.error('Login Error:', error.message);
 
       // Gestione degli errori di Firebase
       if (error.code === 'auth/user-not-found') {
-        alert('No user found with this email.');
+        alert('Utente non trovato. Verifica le credenziali.');
       } else if (error.code === 'auth/wrong-password') {
-        alert('Incorrect password.');
+        alert('Password errata. Riprova.');
       } else if (error.code === 'auth/invalid-email') {
-        alert('Invalid email address.');
+        alert('Indirizzo email non valido.');
       } else {
-        alert('Login failed: ' + error.message);
+        alert('Errore: ' + error.message);
       }
     });
 });

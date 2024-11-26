@@ -13,26 +13,51 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
 
   console.log('Starting registration process for email:', email);
 
-  // Creazione dell'account su Firebase
+  // Registra l'utente tramite Firebase Authentication
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log('Account created successfully!');
-      alert('Registration successful. You can now log in.');
-      window.location.href = '/login'; // Reindirizza alla pagina di login
+      const user = userCredential.user; // Ottieni l'utente creato
+      console.log('User registered successfully:', user);
+
+      // Invia i dati al backend
+      return fetch('/auth/firestore', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          uid: user.uid,
+          email: user.email,
+          username: email.split('@')[0],
+          storyAdmin: false,
+        }),
+      });
+    })
+    .then((response) => {
+      if (!response.ok) {
+        return response.text().then((text) => {
+          throw new Error(text);
+        });
+      }
+      console.log('User data saved successfully to Firestore');
+
+      // Controlla la query string per lo storyId
+      const urlParams = new URLSearchParams(window.location.search);
+      const storyId = urlParams.get('storyId');
+
+      if (storyId) {
+        // Se storyId è presente, reindirizza a /game con lo storyId come query string
+        alert('Registration successful. Redirecting to the game...');
+        window.location.href = `/game?storyId=${storyId}`;
+      } else {
+        // Altrimenti, reindirizza alla pagina di login
+        alert('Registration successful. You can now log in.');
+        window.location.href = '/login';
+      }
     })
     .catch((error) => {
-      console.error('Firebase Error:', error.message);
-
-      // Gestione degli errori di Firebase
-      if (error.code === 'auth/email-already-in-use') {
-        alert('The email address is already in use.');
-      } else if (error.code === 'auth/weak-password') {
-        alert('The password is too weak. Please use a stronger password.');
-      } else if (error.code === 'auth/invalid-email') {
-        alert('The email address is not valid.');
-      } else {
-        alert('Registration failed: ' + error.message);
-      }
+      console.error('Error during registration:', error.message);
+      alert('Registration failed: ' + error.message);
     })
     .finally(() => {
       isSubmitting = false; // Sblocca il form
