@@ -26,6 +26,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Invia cookie con la richiesta
         body: JSON.stringify({
           email: userEmail,
           username: userEmail.split('@')[0],
