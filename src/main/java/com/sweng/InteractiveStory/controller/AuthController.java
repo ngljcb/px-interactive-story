@@ -1,7 +1,8 @@
 package com.sweng.InteractiveStory.controller;
 
-import com.sweng.InteractiveStory.dto.UserRequest;
-import com.sweng.InteractiveStory.service.FirebaseService;
+import com.sweng.InteractiveStory.controller.dto.UserRequest;
+import com.sweng.InteractiveStory.service.FirebaseAuthService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Autowired
-    private FirebaseService firebaseService;
+    private FirebaseAuthService firebaseService;
 
     /**
      * Endpoint per salvare i dati dell'utente su Firestore.
@@ -47,7 +48,7 @@ public class AuthController {
      */
     @PostMapping("/test-save")
     public ResponseEntity<String> testSave(@RequestParam String uid, @RequestParam String email,
-                                           @RequestParam String username, @RequestParam boolean isStoryAdmin) {
+            @RequestParam String username, @RequestParam boolean isStoryAdmin) {
         try {
             // Chiamata di debug per testare il servizio
             firebaseService.saveUser(uid, email, username, isStoryAdmin);

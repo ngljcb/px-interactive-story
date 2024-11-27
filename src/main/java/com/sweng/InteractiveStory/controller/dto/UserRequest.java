@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.dto;
+package com.sweng.InteractiveStory.controller.dto;
 
 public class UserRequest {
     private String uid;
