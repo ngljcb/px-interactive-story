@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.entity.utils;
+package com.sweng.InteractiveStory.entity.utility;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
