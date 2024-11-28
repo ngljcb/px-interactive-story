@@ -3,10 +3,10 @@ package com.sweng.InteractiveStory.entity.game;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.sweng.InteractiveStory.model.*;
 import com.sweng.InteractiveStory.entity.option.Scelta;
 import com.sweng.InteractiveStory.entity.user.*;
 import com.sweng.InteractiveStory.entity.utility.*;
+import com.sweng.InteractiveStory.model.*;
 
 public class Partita {
     private boolean stato;
@@ -35,7 +35,7 @@ public class Partita {
     /**
      * Imposta la storia e i suoi scenari.
      */
-    public void setup(String idStoria, StoriaModel storiaAdapter, ScenarioModel scenarioAdapter, SceltaIndovinelloAdapter sceltaIndovinelloAdapter, SceltaOggettoModel sceltaOggettoAdapter) throws Exception {
+    public void setup(String idStoria, StoriaModel storiaModel, ScenarioModel scenarioModel, SceltaIndovinelloModel sceltaIndovinelloModel, SceltaOggettoModel sceltaOggettoModel) throws Exception {
         if (idStoria == null || idStoria.isEmpty()) {
             throw new IllegalArgumentException("ID della storia non valido o nullo.");
         }
@@ -45,7 +45,7 @@ public class Partita {
         // Carica i dettagli della storia
         try {
             this.storia = new Storia();
-            storia.getStoria(idStoria, storiaAdapter);
+            storia.getStoria(idStoria, storiaModel);
     
             System.out.println("Storia caricata con successo: " + storia.getTitolo());
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class Partita {
     
         // Carica gli scenari della storia
         try {
-            storia.getScenari(idStoria, storiaAdapter, scenarioAdapter);
+            storia.getScenari(idStoria, storiaModel, scenarioModel);
             System.out.println("Scenari caricati con successo: " + storia.getScenariList().size() + " scenari trovati.");
         } catch (Exception e) {
             throw new Exception("Errore durante il caricamento degli scenari: " + e.getMessage());
@@ -66,14 +66,14 @@ public class Partita {
     
             if ("indovinello".equalsIgnoreCase(tipoScelta)) {
                 try {
-                    scenario.getIndovinello(scenario.getId(), sceltaIndovinelloAdapter);
+                    scenario.getIndovinello(scenario.getId(), sceltaIndovinelloModel);
                     System.out.println("Indovinello configurato per lo scenario: " + scenario.getId());
                 } catch (Exception e) {
                     throw new Exception("Errore durante la configurazione dell'indovinello: " + e.getMessage());
                 }
             } else if ("oggetto".equalsIgnoreCase(tipoScelta)) {
                 try {
-                    scenario.getOggetto(scenario.getId(), sceltaOggettoAdapter);
+                    scenario.getOggetto(scenario.getId(), sceltaOggettoModel);
                     System.out.println("Oggetto configurato per lo scenario: " + scenario.getId());
                 } catch (Exception e) {
                     throw new Exception("Errore durante la configurazione dell'oggetto: " + e.getMessage());
@@ -100,6 +100,12 @@ public class Partita {
             return "La partita è già terminata.";
         }
 
+        // Verifica se ci sono oggetti trovati nello scenario corrente
+        if (!scenarioCorrente.hasOggetto()) {
+            this.inventario.aggiungiOggetto(new Oggetto(scenarioCorrente.getOggetto()));
+        }
+
+
         // Verifica se ci sono scelte nello scenario corrente
         if (!scenarioCorrente.hasScelte()) {
             terminaPartita();
@@ -110,6 +116,8 @@ public class Partita {
 
         // Esegui la scelta corrente e ottieni il prossimo scenario
         String prossimoScenarioId = scelta.esegui(this, risposta);
+        System.out.println("Prossimo scenario ID: " + prossimoScenarioId);
+
 
         // Trova il prossimo scenario nella lista della storia
         scenarioCorrente = storia.getScenarioById(prossimoScenarioId);
@@ -147,7 +155,4 @@ public class Partita {
     public void setGiocatore(Giocatore giocatore) {
         this.giocatore = giocatore;
     }
-
-    
-
 }
