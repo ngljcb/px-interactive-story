@@ -1,10 +1,11 @@
 package com.sweng.InteractiveStory.entity.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.sweng.InteractiveStory.adapter.ScenarioAdapter;
-import com.sweng.InteractiveStory.adapter.StoriaAdapter;
+import com.sweng.InteractiveStory.model.ScenarioModel;
+import com.sweng.InteractiveStory.model.StoriaModel;
 
 public class Storia {
     private String id;
@@ -16,6 +17,7 @@ public class Storia {
     public Storia() {
         this.titolo = "";
         this.descrizione = "";
+        this.scenari = new ArrayList<>();
     }
 
     public Storia(String id, String titolo, String descrizione, String idscrittore) {
@@ -23,6 +25,7 @@ public class Storia {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.idscrittore = idscrittore;
+        this.scenari = new ArrayList<>();
     }
     
     /**
@@ -32,10 +35,10 @@ public class Storia {
      * @param storiaAdapter L'istanza di StoriaAdapter per ottenere i dettagli della storia.
      * @throws Exception Se si verifica un errore durante il caricamento dei dati.
      */
-    public void getStoria(String idStoria, StoriaAdapter adapter) throws Exception {
+    public void getStoria(String idStoria, StoriaModel storiaModel) throws Exception {
 
         // L'adapter fornisce i dati come mappa
-        Map<String, String> dati = adapter.getStoria(idStoria);
+        Map<String, String> dati = storiaModel.getStoria(idStoria);
 
         this.id = dati.get("id");
         this.titolo = dati.get("titolo");
@@ -47,17 +50,17 @@ public class Storia {
      * Recupera gli scenari della storia e popola la lista di scenari.
      *
      * @param idStoria L'ID della storia.
-     * @param storiaAdapter L'istanza di StoriaAdapter per ottenere gli ID degli scenari.
-     * @param scenarioAdapter L'istanza di ScenarioAdapter per ottenere i dettagli degli scenari.
+     * @param storiaModel L'istanza di StoriaAdapter per ottenere gli ID degli scenari.
+     * @param scenarioModel L'istanza di ScenarioAdapter per ottenere i dettagli degli scenari.
      * @throws Exception Se si verificano errori durante il caricamento.
      */
-    public void getScenari(String idStoria, StoriaAdapter storiaAdapter, ScenarioAdapter scenarioAdapter) throws Exception {
+    public void getScenari(String idStoria, StoriaModel storiaModel, ScenarioModel scenarioModel) throws Exception {
         // 1. Ottieni l'elenco degli ID degli scenari associati alla storia
-        String[] idScenari = storiaAdapter.getScenari(idStoria);
+        String[] idScenari = storiaModel.getScenari(idStoria);
 
         // 2. Per ogni ID dello scenario, ottieni i dettagli e crea un'istanza di Scenario
         for (String idScenario : idScenari) {
-            Map<String, String> datiScenario = scenarioAdapter.getScenario(idScenario);
+            Map<String, String> datiScenario = scenarioModel.getScenario(idStoria, idScenario);
 
             String id = datiScenario.get("id");
             String descrizione = datiScenario.get("descrizione");
