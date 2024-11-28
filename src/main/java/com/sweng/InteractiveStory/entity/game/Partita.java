@@ -3,7 +3,7 @@ package com.sweng.InteractiveStory.entity.game;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.sweng.InteractiveStory.adapter.*;
+import com.sweng.InteractiveStory.model.*;
 import com.sweng.InteractiveStory.entity.option.Scelta;
 import com.sweng.InteractiveStory.entity.user.*;
 import com.sweng.InteractiveStory.entity.utility.*;
@@ -35,7 +35,7 @@ public class Partita {
     /**
      * Imposta la storia e i suoi scenari.
      */
-    public void setup(String idStoria, StoriaAdapter storiaAdapter, ScenarioAdapter scenarioAdapter, SceltaIndovinelloAdapter sceltaIndovinelloAdapter, SceltaOggettoAdapter sceltaOggettoAdapter) throws Exception {
+    public void setup(String idStoria, StoriaModel storiaAdapter, ScenarioModel scenarioAdapter, SceltaIndovinelloAdapter sceltaIndovinelloAdapter, SceltaOggettoModel sceltaOggettoAdapter) throws Exception {
         if (idStoria == null || idStoria.isEmpty()) {
             throw new IllegalArgumentException("ID della storia non valido o nullo.");
         }

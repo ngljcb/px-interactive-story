@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.adapter;
+package com.sweng.InteractiveStory.model;
 
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.sweng.InteractiveStory.service.FirebaseDBManager;
@@ -6,10 +6,10 @@ import com.sweng.InteractiveStory.service.FirebaseDBManager;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SceltaIndovinelloAdapter {
+public class SceltaIndovinelloModel {
     private final FirebaseDBManager dbManager;
 
-    public SceltaIndovinelloAdapter() {
+    public SceltaIndovinelloModel() {
         this.dbManager = new FirebaseDBManager();
     }
 
