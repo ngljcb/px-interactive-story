@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.adapter;
+package com.sweng.InteractiveStory.model;
 
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class StoriaAdapter {
+public class StoriaModel {
 
     private final FirebaseDBManager dbManager;
 
-    public StoriaAdapter() {
+    public StoriaModel() {
         this.dbManager = new FirebaseDBManager();
     }
 
