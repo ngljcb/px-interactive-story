@@ -3,8 +3,8 @@ package com.sweng.InteractiveStory.gameTest;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.sweng.InteractiveStory.adapter.ScenarioAdapter;
-import com.sweng.InteractiveStory.adapter.StoriaAdapter;
+import com.sweng.InteractiveStory.model.ScenarioModel;
+import com.sweng.InteractiveStory.model.StoriaModel;
 import com.sweng.InteractiveStory.entity.game.Scenario;
 import com.sweng.InteractiveStory.entity.game.Storia;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 class StoriaTest {
 
     private Storia storia;
-    private StoriaAdapter mockStoriaAdapter;
+    private StoriaModel mockStoriaAdapter;
     private ScenarioAdapter mockScenarioAdapter;
 
     @BeforeEach
