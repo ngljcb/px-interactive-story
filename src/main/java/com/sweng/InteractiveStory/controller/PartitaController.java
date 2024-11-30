@@ -3,9 +3,9 @@ package com.sweng.InteractiveStory.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sweng.InteractiveStory.adapter.*;
 import com.sweng.InteractiveStory.entity.game.*;
 import com.sweng.InteractiveStory.entity.user.Giocatore;
+import com.sweng.InteractiveStory.model.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +39,8 @@ public class PartitaController {
             }
 
             partita.setGiocatore(giocatore);
-            partita.setup(idStoria, new StoriaAdapter(), new ScenarioAdapter(), 
-                        new SceltaIndovinelloAdapter(), new SceltaOggettoAdapter());
+            partita.setup(idStoria, new StoriaModel(), new ScenarioModel(), 
+                        new SceltaIndovinelloModel(), new SceltaOggettoModel());
 
             model.addAttribute("partita", partita);
 
@@ -62,7 +62,10 @@ public class PartitaController {
             }
 
             String risposta = payload.get("risposta");
+            System.out.println("Risposta ricevuta: " + risposta);
+
             String risultato = partita.play(risposta);
+            System.out.println("Risultato del gameplay: " + risultato);
 
             return ResponseEntity.ok(risultato);
         } catch (Exception e) {
