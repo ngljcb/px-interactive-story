@@ -1,6 +1,6 @@
 # Interactive Story
 
-<a href="#"><img src="./assets/logo.jpg"></a>
+<a href="#"><img src="./assets/banner.gif"></a>
 
 ## Introduction
 
