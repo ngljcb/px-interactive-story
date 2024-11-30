@@ -73,6 +73,27 @@ public class FirebaseDBManager {
     }
 
     /**
+     * Recupera tutti i documenti da una collezione specifica applicando una condizione where.
+     *
+     * @param collectionPath Il percorso della collezione.
+     * @param key            La chiave su cui applicare la condizione where.
+     * @param value          Il valore per la condizione where.
+     * @return QuerySnapshot che rappresenta i documenti nella collezione che soddisfano la condizione.
+     * @throws Exception In caso di errore durante il recupero.
+     */
+    public QuerySnapshot getDocsByCondition(String collectionPath, String key, String value) throws Exception {
+        try {
+            ApiFuture<QuerySnapshot> future = firestore.collection(collectionPath)
+                    .whereEqualTo(key, value)
+                    .get();
+            return future.get();
+        } catch (Exception e) {
+            throw new Exception("Errore durante il recupero dei documenti dalla collezione: " + collectionPath +
+                    " con condizione where: " + key + " = " + value, e);
+        }
+    }
+    
+    /**
      * Elimina una collezione e tutti i documenti al suo interno.
      *
      * @param collectionPath Il percorso della collezione da eliminare.
