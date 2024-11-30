@@ -1,14 +1,27 @@
 package com.sweng.InteractiveStory.entity.utility;
-public class Oggetto {
-    String nome;
 
-    public Oggetto(String nome)
-    {
+import java.util.UUID;
+
+public class Oggetto {
+    private String nome;
+    private String id;
+
+    public Oggetto(String nome) {
         this.nome = nome;
+        this.id = generateRandomId();
     }
 
-    public String getNome()
-    {
+    // Genera un ID casuale
+    private String generateRandomId() {
+        return UUID.randomUUID().toString();
+    }
+
+    public String getNome() {
         return this.nome;
     }
+
+    public String getId() {
+        return this.id;
+    }
 }
+
