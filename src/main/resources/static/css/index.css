@@ -1,60 +1,150 @@
-/* Impostazioni generali */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
-/* Contenitore principale */
-.container {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 0 10px;
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Stile dei bottoni */
-/* Stile dei bottoni */
-.button {
-    text-decoration: none;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 30px 20px; /* Aumenta il padding verticale */
-    border-radius: 8px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    min-height: 100px; /* Altezza minima */
+footer {
+  position: fixed; /* Cambiato da fixed a relative */
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  background-color: #333;
+  color: white;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Colori distinti per ogni bottone */
-.button-1 {
-    background-color: #4caf50; /* Verde */
-    color: white;
+h1 {
+  margin: 0;
 }
 
-.button-2 {
-    background-color: #2196f3; /* Blu */
-    color: white;
+.story-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 10px;
 }
 
-.button-3 {
-    background-color: #ff5722; /* Arancione */
-    color: white;
+.story-card {
+  justify-content: center;
+  width: 400px;
+  height: 300px;
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Effetti hover */
-.button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+.story-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.story-card h2 {
+  font-size: 1.5em;
+  margin: 10px;
+}
+
+.story-card p {
+  margin: 10px;
+  font-size: 1em;
+  color: #555;
+}
+
+.story-card button {
+  width: calc(100% - 20px);
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.story-card button:hover {
+  background-color: #45a049;
+}
+
+.stories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.story-box {
+  justify-content: center;
+  width: 500px;
+  height: 300px;
+  border: 1px solid #ccc;
+  padding-top: 10%;
+  margin: 8px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.add-story-box {
+  background-color: #e0ffe0;
+}
+
+.story-box h3 {
+  margin-bottom: 12px;
+}
+
+.story-box button {
+  margin: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+}
+
+.navbar .brand {
+  font-size: 1.5rem;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu li a:hover {
+  text-decoration: underline;
 }

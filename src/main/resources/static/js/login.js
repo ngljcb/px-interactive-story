@@ -50,10 +50,14 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
       // Controlla la query string per lo storyId
       const urlParams = new URLSearchParams(window.location.search);
       const storyId = urlParams.get('storyId');
+      const settings = urlParams.get('settings');
 
       if (storyId) {
         // Se storyId è presente, reindirizza a /game con lo storyId come query string
         window.location.href = `/game?storyId=${storyId}`;
+      } else if (settings) {
+        // Se storyId è presente, reindirizza a /game con lo storyId come query string
+        window.location.href = '/settings';
       } else {
         // Altrimenti, reindirizza alla home
         window.location.href = '/';

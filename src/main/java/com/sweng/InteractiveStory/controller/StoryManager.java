@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.sweng.InteractiveStory.model.StoryManagerModel;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +14,8 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/api/stories")
 public class StoryManager {
+
+    private static final Logger logger = LoggerFactory.getLogger(StoryManager.class);
 
     /**
      * Recupera tutte le storie dalla collezione "Storie".
