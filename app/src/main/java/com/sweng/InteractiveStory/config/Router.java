@@ -20,5 +20,24 @@ public class Router {
     public String registerPage() {
         return "register"; // Restituisce register.html da src/main/resources/templates
     }
-}
 
+    @GetMapping({"/game"})
+    public String gamePage() {
+        return "game"; // Restituisce game.html da src/main/resources/templates
+    }
+
+    @GetMapping({"/settings"})
+    public String settingsPage() {
+        return "settings"; // Restituisce game.html da src/main/resources/templates
+    }
+
+    @GetMapping({"/create"})
+    public String createPage() {
+        return "create"; // Restituisce game.html da src/main/resources/templates
+    }
+
+    @GetMapping({"/modify"})
+    public String modifyPage() {
+        return "modify"; // Restituisce game.html da src/main/resources/templates
+    }
+}
