@@ -14,7 +14,7 @@ import com.sweng.InteractiveStory.entity.user.Giocatore;
 public class AuthService {
 
     @Autowired
-    private FirebaseService firebaseService;
+    private FirebaseAuthService firebaseService;
 
     // Registra un nuovo utente
     public String registerUser(String email, String password) throws FirebaseAuthException {

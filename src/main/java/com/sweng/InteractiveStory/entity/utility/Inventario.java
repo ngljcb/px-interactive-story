@@ -1,17 +1,17 @@
 package com.sweng.InteractiveStory.entity.utility;
-import java.util.List;
-import java.util.Optional;
+
 import java.util.ArrayList;
+import java.util.List;
+
 public class Inventario {
     private List<Oggetto> oggetti;
 
     public Inventario() {
-        oggetti = new ArrayList<Oggetto>();
+        oggetti = new ArrayList<>();
     }
 
-    public Oggetto cercaOggetto(Oggetto oggetto) { // (optional)
-        // todo, itera su la lista per trovare l'oggetto
-        return oggetto;
+    public boolean haOggetto(String nome) {
+        return oggetti.stream().anyMatch(o -> o.getNome().equals(nome));
     }
 
     public void aggiungiOggetto(Oggetto oggetto) {
