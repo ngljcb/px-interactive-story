@@ -88,7 +88,14 @@ public class PartitaController {
             Map<String, Object> scenarioData = new HashMap<>();
             scenarioData.put("id", scenarioCorrente.getId());
             scenarioData.put("descrizione", scenarioCorrente.getDescrizione());
+            scenarioData.put("tipoScelta", scenarioCorrente.getTipoScelta());
+            scenarioData.put("ordernumber", scenarioCorrente.getOrderNumber());
+            scenarioData.put("oggettotrovato", scenarioCorrente.getOggetto());
+            
             scenarioData.put("scelte", scenarioCorrente.getScelte() != null ? scenarioCorrente.getScelte().toString() : null);
+            scenarioData.put("testodamostrare", scenarioCorrente.getScelte() != null ? scenarioCorrente.getScelte().testoDaMostrare() : null);
+            scenarioData.put("scenarioCorretto", scenarioCorrente.getScelte() != null ? scenarioCorrente.getScelte().getProssimoScenarioCorretto() : null);
+            scenarioData.put("scenarioErrato", scenarioCorrente.getScelte() != null ? scenarioCorrente.getScelte().getProssimoScenarioErrato() : null);
 
             return ResponseEntity.ok(scenarioData);
         } catch (Exception e) {
