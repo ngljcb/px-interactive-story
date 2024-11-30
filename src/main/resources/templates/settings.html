@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestione Storie</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="brand">Interactive Story</div>
+        <div class="brand">Gestione Storie</div>
+        <ul class="menu" id="menu">
+          <li><a href="/index?auth=true">Home</a></li>
+          <li id="login-section">
+            <a id="login-link" href="/login">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="stories-container" class="stories-container">
+        <!-- I box delle storie verranno caricati dinamicamente -->
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 Interactive Story Platform</p>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        const loginSection = document.getElementById('login-section');
+        const loginLink = document.getElementById('login-link');
+
+        try {
+          // Verifica se l'utente è loggato
+          const response = await fetch('/session/user');
+          if (response.ok) {
+            const user = await response.json();
+            // Se l'utente è loggato, mostra il pulsante Logout
+            loginLink.textContent = 'Logout';
+            loginLink.href = '#';
+            loginLink.onclick = async () => {
+              await fetch('/session/logout', { method: 'POST' });
+              alert('Logout effettuato.');
+              window.location.reload(); // Ricarica la pagina
+            };
+          } else {
+            throw new Error('Non loggato');
+          }
+        } catch (error) {
+          // Se non loggato, mostra il pulsante Login
+          loginLink.textContent = 'Login';
+          loginLink.href = '/login';
+        }
+      });
+    </script>
+    <script src="/js/settings.js"></script>
+  </body>
+</html>
