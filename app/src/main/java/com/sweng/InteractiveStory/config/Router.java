@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.controller;
+package com.sweng.InteractiveStory.config;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
