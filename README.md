@@ -69,9 +69,8 @@ The project integrates modern technologies for both frontend and backend:
 ### Prerequisites
 
 - **Java JDK 17+**
-- **Node.js** (for frontend dependencies if needed)
 - **Maven** (for building the backend)
-- **Firebase Project**: Set up Firebase Firestore and Authentication.
+- **Firebase**: Set up Firebase Project
 
 ### Steps to Install
 
@@ -79,7 +78,7 @@ The project integrates modern technologies for both frontend and backend:
 
    ```bash
    git clone https://github.com/ngljcb/InteractiveStory.git
-   cd /app/InteractiveStory
+   cd /InteractiveStory/app
    ```
 
 2. **Initial Setup**:
