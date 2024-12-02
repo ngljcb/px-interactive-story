@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Story Game</title>
+    <link rel="stylesheet" href="/css/game.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Interactive Story Game</h1>
+      </header>
+
+      <main class="main">
+        <section id="scenario">
+          <h2 id="scenario-title" class="scenario-title">Benvenuto nel gioco!</h2>
+          <p id="scenario-description" class="scenario-description">Caricamento dello scenario...</p>
+        </section>
+
+        <section id="dynamic-content" class="dynamic-content">
+          <!-- Contenuto dinamico come indovinello o oggetto richiesto -->
+          <p id="special-content"></p>
+        </section>
+
+        <section id="choices-container" class="choices-container"></section>
+
+        <form id="answer-form" class="answer-form">
+          <input type="text" id="answer" placeholder="Inserisci la tua risposta" required />
+          <button type="submit" class="btn-submit">Invia</button>
+        </form>
+      </main>
+
+      <footer class="footer">
+        <p>© 2024 Interactive Story Game</p>
+      </footer>
+    </div>
+
+    <script src="/js/game.js"></script>
+  </body>
+</html>
