@@ -34,4 +34,16 @@ public class SceltaOggetto implements Scelta {
     public String getProssimoScenarioErrato() {
         return scenarioSenzaOggetto;
     }
+
+    public String getNomeOggetto() {
+        return nomeOggettoRichiesto;
+    }
+
+    public String getIdScenarioConOggetto() {
+        return scenarioConOggetto;
+    }
+
+    public String getIdScenarioSenzaOggetto() {
+        return scenarioSenzaOggetto;
+    }
 }

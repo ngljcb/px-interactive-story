@@ -18,4 +18,8 @@ public class IndovinelloTestuale implements Indovinello {
     public boolean verificaRisposta(String risposta) {
         return risposta.toLowerCase().equals(this.risposta);
     }
+
+    public String getRisposta() {
+        return risposta;
+    }
 }

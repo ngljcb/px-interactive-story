@@ -1,4 +1,4 @@
-package com.sweng.InteractiveStory.entity.utils;
+package com.sweng.InteractiveStory.entity.utility;
 
 import org.junit.jupiter.api.Test;
 
