@@ -84,15 +84,15 @@ public class FirebaseDBManager {
     public QuerySnapshot getDocsByCondition(String collectionPath, String key, String value) throws Exception {
         try {
             ApiFuture<QuerySnapshot> future = firestore.collection(collectionPath)
-                    .whereEqualTo(key, value)
-                    .get();
+                                                        .whereEqualTo(key, value)
+                                                        .get();
             return future.get();
         } catch (Exception e) {
             throw new Exception("Errore durante il recupero dei documenti dalla collezione: " + collectionPath +
-                    " con condizione where: " + key + " = " + value, e);
+                                 " con condizione where: " + key + " = " + value, e);
         }
     }
-    
+
     /**
      * Elimina una collezione e tutti i documenti al suo interno.
      *
@@ -194,5 +194,24 @@ public class FirebaseDBManager {
     public void modifyDocument(String collectionPath, String documentId, Map<String, Object> data) throws Exception {
         addDocument(collectionPath, documentId, data); // Riutilizza il metodo di aggiunta
         System.out.println("Documento modificato: " + documentId + " nella collezione: " + collectionPath);
+    }
+
+    /**
+     * Aggiunge un documento con un ID generato automaticamente.
+     *
+     * @param collectionPath Il percorso della collezione.
+     * @param data           I dati del documento.
+     * @return L'ID generato per il nuovo documento.
+     * @throws Exception In caso di errore durante l'aggiunta.
+     */
+    public String addDocumentWithGeneratedId(String collectionPath, Map<String, Object> data) throws Exception {
+        try {
+            DocumentReference docRef = firestore.collection(collectionPath).document();
+            docRef.set(data).get();
+            System.out.println("Documento aggiunto con ID generato: " + docRef.getId());
+            return docRef.getId();
+        } catch (Exception e) {
+            throw new Exception("Errore durante l'aggiunta del documento con ID generato nella collezione: " + collectionPath, e);
+        }
     }
 }

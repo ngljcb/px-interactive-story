@@ -1,44 +1,28 @@
-/* Reset di base */
-* {
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  background-color: #f4f4f9;
+  background-color: #f9f9f9;
   color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
 }
 
 /* Container principale */
 .container {
+  display: flex;
   width: 90%;
   max-width: 800px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-}
-
-/* Header */
-.header {
-  background-color: #4caf50;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-.header h1 {
-  font-size: 1.8rem;
+  margin-inline: 30vw;
+  margin-block: 30vh;
 }
 
 /* Main content */
 .main {
+  justify-content: center;
+  align-items: center;
   padding: 20px;
 }
 
@@ -93,4 +77,33 @@ body {
   text-align: center;
   padding: 10px;
   font-size: 0.9rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+}
+
+.navbar .brand {
+  font-size: 1.5rem;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu li a:hover {
+  text-decoration: underline;
 }
