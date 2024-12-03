@@ -1,6 +1,9 @@
 package com.sweng.InteractiveStory.controller;
 
 import com.sweng.InteractiveStory.entity.user.Giocatore;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,12 +55,16 @@ public class SessionController {
      * Recupera l'utente dalla sessione.
      *
      * @param user Oggetto Giocatore associato alla sessione
-     * @return Informazioni sull'utente
+     * @return Informazioni sull'utente o errore se non loggato
      */
     @GetMapping("/user")
     @ResponseBody // Indica che la risposta è JSON
-    public Giocatore getUserFromSession(@ModelAttribute("user") Giocatore user) {
-        return user;
+    public ResponseEntity<Object> getUserFromSession(@ModelAttribute("user") Giocatore user) {
+        if (user == null || user.getUid() == null || user.getUid().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                 .body(Map.of("error", "Utente non loggato."));
+        }
+        return ResponseEntity.ok(user);
     }
 
     /**
