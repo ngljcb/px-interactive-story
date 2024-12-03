@@ -35,5 +35,9 @@ public class SceltaIndovinello implements Scelta {
     public String getProssimoScenarioErrato() {
         return scenarioErrato;
     }
+
+    public Indovinello getIndovinello() {
+        return indovinello;
+    }
 }
 
