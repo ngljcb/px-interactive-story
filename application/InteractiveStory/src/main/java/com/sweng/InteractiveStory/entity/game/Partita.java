@@ -155,4 +155,16 @@ public class Partita {
     public void setGiocatore(Giocatore giocatore) {
         this.giocatore = giocatore;
     }
+    
+    public void setStoria(Storia storia) {
+        this.storia = storia;
+    }
+
+    public boolean getStato() {
+        return stato;
+    }
+
+    public String getDataFine() {
+        return dataFine;
+    }
 }

@@ -108,4 +108,8 @@ public class Storia {
     public String getTitolo() {
         return titolo;
     }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
 }
