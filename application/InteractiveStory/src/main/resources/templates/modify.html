@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modifica Storia</title>
+    <link rel="stylesheet" href="/css/create.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="brand">Interactive Story</div>
+        <div class="brand">Modifica Storia</div>
+        <ul class="menu" id="menu">
+          <li><a href="/settings">Back</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <!-- Sezione Storia -->
+      <section id="story-section">
+        <h2>Storia</h2>
+        <label for="idscrittore">User ID:</label>
+        <input type="text" id="idscrittore" disabled />
+
+        <label for="story-title">Titolo:</label>
+        <input type="text" id="story-title" placeholder="Inserisci il titolo della storia" required />
+
+        <label for="story-description">Descrizione:</label>
+        <textarea id="story-description" placeholder="Inserisci la descrizione della storia" required></textarea>
+      </section>
+
+      <!-- Sezione Scenari -->
+      <section id="scenarios-section">
+        <h2>Scenari</h2>
+        <div id="scenarios-container"></div>
+
+        <!-- Pulsante per aggiungere uno scenario -->
+        <button id="add-scenario-button">Aggiungi Scenario</button>
+      </section>
+
+      <!-- Pulsante per confermare -->
+      <section id="actions-section">
+        <button id="save-story-button">Salva Modifiche</button>
+      </section>
+    </main>
+    <script src="/js/modify.js"></script>
+  </body>
+</html>
