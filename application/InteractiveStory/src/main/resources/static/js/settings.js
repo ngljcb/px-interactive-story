@@ -86,15 +86,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderStories(stories, userId) {
     storiesContainer.innerHTML = ''; // Svuota il contenitore
 
-    if (stories.length === 0) {
-      const noStoriesMessage = document.createElement('p');
-      noStoriesMessage.textContent = 'Non ci sono storie disponibili al momento.';
-      storiesContainer.appendChild(noStoriesMessage);
-      return;
-    }
-
     const addStoryCard = createAddStoryCard();
     storiesContainer.appendChild(addStoryCard);
+
+    if (stories.length === 0) {
+      return;
+    }
 
     stories.forEach((story) => {
       const storyCard = createStoryCard(story, userId);
