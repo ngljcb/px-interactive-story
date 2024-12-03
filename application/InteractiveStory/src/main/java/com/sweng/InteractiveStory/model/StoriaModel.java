@@ -35,7 +35,7 @@ public class StoriaModel {
         dati.put("id", idStoria);
         dati.put("titolo", (String) storyDoc.get("titolo"));
         dati.put("descrizione", (String) storyDoc.get("descrizione"));
-        dati.put("idscrittore", (String) storyDoc.get("idscrittore"));
+        dati.put("idscrittore", (String) storyDoc.get("user-id"));
         return dati;
     }
 
