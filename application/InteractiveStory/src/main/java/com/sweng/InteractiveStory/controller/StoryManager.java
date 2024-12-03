@@ -450,9 +450,21 @@ public class StoryManager {
     }
 
     private Map<String, Object> safeCastToMap(Object obj, String errorMessage) {
-        if (obj instanceof Map) {
-            return (Map<String, Object>) obj;
+        if (obj instanceof Map<?, ?>) {
+            Map<?, ?> rawMap = (Map<?, ?>) obj;
+            Map<String, Object> castedMap = new HashMap<>();
+            
+            for (Map.Entry<?, ?> entry : rawMap.entrySet()) {
+                if (entry.getKey() instanceof String) {
+                    castedMap.put((String) entry.getKey(), entry.getValue());
+                } else {
+                    throw new IllegalArgumentException("Chiave non valida nella mappa: atteso String.");
+                }
+            }
+            
+            return castedMap;
         }
         throw new IllegalArgumentException(errorMessage);
     }
+    
 }
