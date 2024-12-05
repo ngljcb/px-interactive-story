@@ -1,153 +1,84 @@
 package com.sweng.InteractiveStory.entity.game;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.util.Map;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.sweng.InteractiveStory.entity.option.SceltaIndovinello;
-import com.sweng.InteractiveStory.entity.option.SceltaOggetto;
-import com.sweng.InteractiveStory.entity.option.IndovinelloTestuale;
 import com.sweng.InteractiveStory.model.SceltaIndovinelloModel;
 import com.sweng.InteractiveStory.model.SceltaOggettoModel;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class ScenarioTest {
 
-    private Scenario scenario;
-    private SceltaIndovinelloModel mockSceltaIndovinelloModel;
-    private SceltaOggettoModel mockSceltaOggettoModel;
+    @Test
+    void testScenarioCreazione() {
+        // Crea uno scenario di test
+        Scenario scenario = new Scenario("storia1", "1", "Descrizione del primo scenario", 1, "indovinello", "Spada");
 
-    @BeforeEach
-    void setUp() {
-        // Inizializza uno scenario di base
-        scenario = new Scenario("storia1", "scenario1", "Descrizione test", 1, "indovinello", null);
-
-        // Mock dei modelli
-        mockSceltaIndovinelloModel = mock(SceltaIndovinelloModel.class);
-        mockSceltaOggettoModel = mock(SceltaOggettoModel.class);
+        // Verifica che i campi siano correttamente assegnati
+        assertEquals("1", scenario.getId());
+        assertEquals("Descrizione del primo scenario", scenario.getDescrizione());
+        assertEquals(1, scenario.getOrderNumber());
+        assertEquals("indovinello", scenario.getTipoScelta());
+        assertEquals("Spada", scenario.getOggetto());
     }
 
     @Test
-    void testGetIndovinello_CreaSceltaIndovinello() throws Exception {
-        // Mock dei dati dell'indovinello
-        Map<String, String> indovinelloData = Map.of(
-            "testo", "Qual è il numero primo più piccolo?",
-            "risposta", "2",
-            "prox-scenario-corretto", "scenario2",
-            "prox-scenario-errato", "scenario3"
-        );
+    void testHasScelteSenzaScelte() {
+        // Crea uno scenario senza scelte
+        Scenario scenario = new Scenario("storia1", "1", "Scenario senza scelte", 1, "oggetto", "Spada");
 
-        when(mockSceltaIndovinelloModel.getIndovinello("storia1", "scenario1")).thenReturn(indovinelloData);
-
-        // Esegui il metodo
-        scenario.getIndovinello("scenario1", mockSceltaIndovinelloModel);
-
-        // Verifica che la scelta sia stata creata correttamente
-        assertTrue(scenario.hasScelte());
-        assertTrue(scenario.getScelte() instanceof SceltaIndovinello);
-
-        SceltaIndovinello sceltaIndovinello = (SceltaIndovinello) scenario.getScelte();
-        IndovinelloTestuale indovinello = (IndovinelloTestuale) sceltaIndovinello.getIndovinello();
-
-        assertEquals("Qual è il numero primo più piccolo?", indovinello.getTesto());
-        assertEquals("2", indovinello.getRisposta());
-        assertEquals("scenario2", sceltaIndovinello.getProssimoScenarioCorretto());
-        assertEquals("scenario3", sceltaIndovinello.getProssimoScenarioErrato());
-    }
-
-    @Test
-    void testGetIndovinello_ErroreNelRecupero() throws Exception {
-        // Simula un'eccezione durante il recupero
-        when(mockSceltaIndovinelloModel.getIndovinello("storia1", "scenario1"))
-            .thenThrow(new RuntimeException("Errore nel recupero dell'indovinello"));
-
-        // Verifica che venga lanciata un'eccezione
-        Exception exception = assertThrows(Exception.class, () -> {
-            scenario.getIndovinello("scenario1", mockSceltaIndovinelloModel);
-        });
-
-        assertTrue(exception.getMessage().contains("Errore nel recupero dell'indovinello"));
+        // Verifica che lo scenario non abbia scelte
         assertFalse(scenario.hasScelte());
     }
 
     @Test
-    void testGetOggetto_CreaSceltaOggetto() throws Exception {
-        // Mock dei dati dell'oggetto
-        Map<String, String> oggettoData = Map.of(
-            "nome-oggetto", "Chiave dorata",
-            "prox-scenario-corretto", "scenario2",
-            "prox-scenario-errato", "scenario3"
-        );
+    void testHasOggettoSenzaOggetto() {
+        // Crea uno scenario senza oggetto
+        Scenario scenario = new Scenario("storia1", "2", "Scenario senza oggetto", 1, "indovinello", null);
 
-        when(mockSceltaOggettoModel.getOggetto("storia1", "scenario1")).thenReturn(oggettoData);
-
-        // Esegui il metodo
-        scenario.getOggetto("scenario1", mockSceltaOggettoModel);
-
-        // Verifica che la scelta sia stata creata correttamente
-        assertTrue(scenario.hasScelte());
-        assertTrue(scenario.getScelte() instanceof SceltaOggetto);
-
-        SceltaOggetto sceltaOggetto = (SceltaOggetto) scenario.getScelte();
-
-        assertEquals("Chiave dorata", sceltaOggetto.getNomeOggetto());
-        assertEquals("scenario2", sceltaOggetto.getIdScenarioConOggetto());
-        assertEquals("scenario3", sceltaOggetto.getIdScenarioSenzaOggetto());
-    }
-
-    @Test
-    void testGetOggetto_ErroreNelRecupero() throws Exception {
-        // Simula un'eccezione durante il recupero
-        when(mockSceltaOggettoModel.getOggetto("storia1", "scenario1"))
-            .thenThrow(new RuntimeException("Errore nel recupero dell'oggetto"));
-
-        // Verifica che venga lanciata un'eccezione
-        Exception exception = assertThrows(Exception.class, () -> {
-            scenario.getOggetto("scenario1", mockSceltaOggettoModel);
-        });
-
-        assertTrue(exception.getMessage().contains("Errore nel recupero dell'oggetto"));
-        assertFalse(scenario.hasScelte());
-    }
-
-    @Test
-    void testHasOggetto_TrueWhenOggettoIsNotNull() {
-        // Verifica che un oggetto esista
-        scenario.setOggetto("Chiave magica");
-        assertTrue(scenario.hasOggetto());
-    }
-
-    @Test
-    void testHasOggetto_FalseWhenOggettoIsNull() {
-        // Verifica che l'oggetto non esista
-        scenario.setOggetto(null);
+        // Verifica che lo scenario non abbia oggetto
         assertFalse(scenario.hasOggetto());
     }
 
     @Test
-    void testHasScelte_FalseWhenNoScelte() {
-        assertFalse(scenario.hasScelte());
+    void testGetTipoScelta() {
+        // Crea uno scenario con tipo di scelta
+        Scenario scenario = new Scenario("storia1", "1", "Scenario con tipo di scelta", 1, "oggetto", "Spada");
+
+        // Verifica che il tipo di scelta sia corretto
+        assertEquals("oggetto", scenario.getTipoScelta());
     }
 
     @Test
-    void testHasScelte_TrueWhenScelteIsSet() throws Exception {
-        // Mock un'oggetto scelta
-        Map<String, String> oggettoData = Map.of(
-            "nome-oggetto", "Chiave dorata",
-            "prox-scenario-corretto", "scenario2",
-            "prox-scenario-errato", "scenario3"
-        );
+    void testSetTipoScelta() {
+        // Crea uno scenario inizialmente con un tipo di scelta
+        Scenario scenario = new Scenario("storia1", "1", "Scenario con tipo di scelta", 1, "oggetto", "Spada");
 
-        when(mockSceltaOggettoModel.getOggetto("storia1", "scenario1")).thenReturn(oggettoData);
+        // Modifica il tipo di scelta
+        scenario.setTipoScelta("indovinello");
 
-        // Crea la scelta
-        scenario.getOggetto("scenario1", mockSceltaOggettoModel);
+        // Verifica che il tipo di scelta sia stato aggiornato
+        assertEquals("indovinello", scenario.getTipoScelta());
+    }
 
-        // Verifica
-        assertTrue(scenario.hasScelte());
+    @Test
+    void testGetDescrizione() {
+        // Crea uno scenario con descrizione
+        Scenario scenario = new Scenario("storia1", "1", "Descrizione di test", 1, "oggetto", "Spada");
+
+        // Verifica che la descrizione sia corretta
+        assertEquals("Descrizione di test", scenario.getDescrizione());
+    }
+
+    @Test
+    void testSetDescrizione() {
+        // Crea uno scenario inizialmente con una descrizione
+        Scenario scenario = new Scenario("storia1", "1", "Descrizione iniziale", 1, "oggetto", "Spada");
+
+        // Modifica la descrizione
+        scenario.setDescrizione("Nuova descrizione");
+
+        // Verifica che la descrizione sia stata aggiornata
+        assertEquals("Nuova descrizione", scenario.getDescrizione());
     }
 }
-

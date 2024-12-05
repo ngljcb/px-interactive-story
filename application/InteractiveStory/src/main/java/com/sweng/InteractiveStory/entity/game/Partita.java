@@ -167,4 +167,8 @@ public class Partita {
     public String getDataFine() {
         return dataFine;
     }
+
+    public String getDataInizio() {
+        return dataInizio;
+    }
 }

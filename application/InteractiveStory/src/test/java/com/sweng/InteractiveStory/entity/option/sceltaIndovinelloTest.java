@@ -1,74 +1,77 @@
 package com.sweng.InteractiveStory.entity.option;
 
-import com.sweng.InteractiveStory.entity.game.Partita;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
+import com.sweng.InteractiveStory.entity.game.Partita;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-class SceltaIndovinelloTest {
+class sceltaIndovinelloTest {
 
-    private SceltaIndovinello sceltaIndovinello;
-
-    @Mock
-    private Indovinello mockIndovinello;
-
-    @Mock
-    private Partita mockPartita;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-
-        // Configura il mock di Indovinello
-        when(mockIndovinello.getTesto()).thenReturn("Qual è il numero primo più piccolo?");
+    @Test
+    void testEseguiRispostaCorretta() {
+        // Crea un indovinello con una risposta corretta
+        Indovinello indovinello = new IndovinelloTestuale("Qual è il colmo per un matematico?", "Avere una mente quadrata");
         
-        // Inizializza l'oggetto di test
-        sceltaIndovinello = new SceltaIndovinello(mockIndovinello, "scenarioCorretto", "scenarioErrato");
+        // Crea la scelta con indovinello e scenari
+        SceltaIndovinello scelta = new SceltaIndovinello(indovinello, "scenario1", "scenario2");
+
+        // Esegui la scelta con la risposta corretta
+        String risultato = scelta.esegui(new Partita(), "Avere una mente quadrata");
+
+        // Verifica che il risultato sia lo scenario corretto
+        assertEquals("scenario1", risultato);
     }
 
     @Test
-    void testEsegui_RispostaCorretta() {
-        // Configura il mock per restituire true quando la risposta è corretta
-        when(mockIndovinello.verificaRisposta("2")).thenReturn(true);
+    void testEseguiRispostaErrata() {
+        // Crea un indovinello con una risposta corretta
+        Indovinello indovinello = new IndovinelloTestuale("Qual è il colmo per un matematico?", "Avere una mente quadrata");
+        
+        // Crea la scelta con indovinello e scenari
+        SceltaIndovinello scelta = new SceltaIndovinello(indovinello, "scenario1", "scenario2");
 
-        // Esegui il metodo
-        String risultato = sceltaIndovinello.esegui(mockPartita, "2");
+        // Esegui la scelta con una risposta errata
+        String risultato = scelta.esegui(new Partita(), "Non avere una mente quadrata");
 
-        // Verifica che venga restituito lo scenario corretto
-        assertEquals("scenarioCorretto", risultato);
-
-        // Verifica che il metodo verificaRisposta sia stato chiamato con la risposta fornita
-        verify(mockIndovinello).verificaRisposta("2");
-    }
-
-    @Test
-    void testEsegui_RispostaErrata() {
-        // Configura il mock per restituire false quando la risposta è errata
-        when(mockIndovinello.verificaRisposta("5")).thenReturn(false);
-
-        // Esegui il metodo
-        String risultato = sceltaIndovinello.esegui(mockPartita, "5");
-
-        // Verifica che venga restituito lo scenario errato
-        assertEquals("scenarioErrato", risultato);
-
-        // Verifica che il metodo verificaRisposta sia stato chiamato con la risposta fornita
-        verify(mockIndovinello).verificaRisposta("5");
+        // Verifica che il risultato sia lo scenario errato
+        assertEquals("scenario2", risultato);
     }
 
     @Test
     void testTestoDaMostrare() {
-        // Esegui il metodo
-        String testo = sceltaIndovinello.testoDaMostrare();
+        // Crea un indovinello
+        Indovinello indovinello = new IndovinelloTestuale("Qual è il colmo per un matematico?", "Avere una mente quadrata");
+        
+        // Crea la scelta con l'indovinello
+        SceltaIndovinello scelta = new SceltaIndovinello(indovinello, "scenario1", "scenario2");
 
-        // Verifica che il testo mostrato sia quello fornito dall'indovinello
-        assertEquals("Qual è il numero primo più piccolo?", testo);
+        // Verifica che il testo da mostrare dell'indovinello sia corretto
+        assertEquals("Qual è il colmo per un matematico?", scelta.testoDaMostrare());
+    }
 
-        // Verifica che il metodo getTesto sia stato chiamato
-        verify(mockIndovinello).getTesto();
+    @Test
+    void testGetProssimoScenarioCorretto() {
+        // Crea un indovinello
+        Indovinello indovinello = new IndovinelloTestuale("Qual è il colmo per un matematico?", "Avere una mente quadrata");
+        
+        // Crea la scelta con l'indovinello
+        SceltaIndovinello scelta = new SceltaIndovinello(indovinello, "scenario1", "scenario2");
+
+        // Verifica che il prossimo scenario corretto sia quello giusto
+        assertEquals("scenario1", scelta.getProssimoScenarioCorretto());
+    }
+
+    @Test
+    void testGetProssimoScenarioErrato() {
+        // Crea un indovinello
+        Indovinello indovinello = new IndovinelloTestuale("Qual è il colmo per un matematico?", "Avere una mente quadrata");
+        
+        // Crea la scelta con l'indovinello
+        SceltaIndovinello scelta = new SceltaIndovinello(indovinello, "scenario1", "scenario2");
+
+        // Verifica che il prossimo scenario errato sia quello giusto
+        assertEquals("scenario2", scelta.getProssimoScenarioErrato());
     }
 }
+
