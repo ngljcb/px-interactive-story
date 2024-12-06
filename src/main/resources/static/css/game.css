@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-color: white;
   color: #333;
 }
 
@@ -23,10 +23,13 @@ body {
 .main {
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
 
 .scenario-title {
+  text-align: center;
   font-size: 1.5rem;
   margin-bottom: 10px;
   color: #4caf50;
@@ -51,6 +54,15 @@ body {
 .answer-form input {
   padding: 10px;
   font-size: 1rem;
+  width: 50%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.answer-form select {
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -70,22 +82,13 @@ body {
   background-color: #45a049;
 }
 
-/* Footer */
-.footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  font-size: 0.9rem;
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: #333;
-  color: white;
+  background-color: white;
+  color: #333;
 }
 
 .navbar .brand {
@@ -99,7 +102,7 @@ body {
 }
 
 .menu li a {
-  color: white;
+  color: #333;
   text-decoration: none;
   font-weight: bold;
 }

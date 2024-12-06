@@ -2,8 +2,9 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-color: white;
   color: #333;
+  margin-top: 120px;
 }
 
 main {
@@ -28,6 +29,23 @@ h1 {
   margin: 0;
 }
 
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin-inline: 24%;
+  padding: 1%;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
 .story-container {
   display: flex;
   flex-wrap: wrap;
@@ -38,12 +56,11 @@ h1 {
 }
 
 .story-card {
-  justify-content: center;
   width: 400px;
-  height: 300px;
-  padding-top: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
+  height: 350px;
+  padding-top: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: white;
@@ -57,14 +74,22 @@ h1 {
 }
 
 .story-card h2 {
+  text-align: center;
   font-size: 1.5em;
   margin: 10px;
+  height: 20%; /* Altezza fissa per mantenere uniforme */
+  overflow: hidden; /* Nascondi il contenuto in eccesso */
+  text-overflow: ellipsis; /* Aggiungi i puntini di sospensione */
 }
 
 .story-card p {
+  text-align: center;
   margin: 10px;
   font-size: 1em;
   color: #555;
+  height: 50%; /* Altezza fissa per mantenere uniforme */
+  overflow: hidden; /* Nascondi il contenuto in eccesso */
+  text-overflow: ellipsis; /* Aggiungi i puntini di sospensione */
 }
 
 .story-card button {
@@ -86,7 +111,7 @@ h1 {
 
 .stories-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: row wrap;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -95,8 +120,8 @@ h1 {
 
 .story-box {
   justify-content: center;
-  width: 500px;
-  height: 300px;
+  width: 400px;
+  height: 200px;
   border: 1px solid #ccc;
   padding-top: 10%;
   margin: 8px;
@@ -118,33 +143,4 @@ h1 {
   padding: 8px 16px;
   font-size: 14px;
   cursor: pointer;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: #333;
-  color: white;
-}
-
-.navbar .brand {
-  font-size: 1.5rem;
-}
-
-.menu {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.menu li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.menu li a:hover {
-  text-decoration: underline;
 }

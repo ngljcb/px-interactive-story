@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const storyContainer = document.getElementById('stories-container');
+  const searchInput = document.getElementById('search-input'); // Aggiungi un riferimento all'input di ricerca
 
   // Funzione per recuperare le storie dal backend
   async function fetchStories() {
@@ -67,17 +68,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     return card;
   }
 
-  try {
-    // Carica le storie dal backend
-    const stories = await fetchStories();
-
-    // Mostra le storie
+  // Funzione per mostrare le storie filtrate
+  function displayStories(stories) {
+    storyContainer.innerHTML = ''; // Pulisce il contenitore
     if (stories.length === 0) {
-      storyContainer.innerHTML = `<p>Nessuna storia disponibile al momento.</p>`;
+      storyContainer.innerHTML = `<p>Nessuna storia trovata.</p>`;
     } else {
       stories.forEach((story) => {
         const storyCard = createStoryCard(story);
         storyContainer.appendChild(storyCard);
+      });
+    }
+  }
+
+  // Funzione per filtrare le storie in base al nome
+  function filterStoriesByName(stories, searchText) {
+    return stories.filter((story) => story.title.toLowerCase().startsWith(searchText.toLowerCase()));
+  }
+
+  try {
+    // Carica le storie dal backend
+    const stories = await fetchStories();
+
+    // Mostra tutte le storie inizialmente
+    displayStories(stories);
+
+    // Aggiungi un listener per la ricerca
+    if (searchInput) {
+      searchInput.addEventListener('input', (event) => {
+        const searchText = event.target.value;
+        const filteredStories = filterStoriesByName(stories, searchText);
+        displayStories(filteredStories);
       });
     }
   } catch (error) {

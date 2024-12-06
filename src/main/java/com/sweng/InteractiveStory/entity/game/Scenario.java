@@ -18,6 +18,9 @@ public class Scenario {
     private String oggetto;    
     private String idStoria;
     private Scelta scelte;
+
+    private SceltaIndovinelloModel sceltaIndovinelloModel;
+    private SceltaOggettoModel sceltaOggettoModel;
     
     public Scenario(String idStoria, String idScenario, String descrizione, int order, String tipoScelta,
     String oggetto) {
@@ -27,27 +30,30 @@ public class Scenario {
         this.tipoScelta = tipoScelta;
         this.oggetto = oggetto;
         this.idStoria = idStoria;
+
+        sceltaIndovinelloModel = new SceltaIndovinelloModel();
+        sceltaOggettoModel = new SceltaOggettoModel();
     }
     
     /**
      * Recupera l'indovinello da Firebase tramite l'IndovinelloAdapter e lo associa come SceltaIndovinello.
      *
      * @param idScenario L'ID dello scenario.
-     * @param model    L'adapter che gestisce l'accesso ai dati degli indovinelli.
+     * @param sceltaIndovinelloModel    L'adapter che gestisce l'accesso ai dati degli indovinelli.
      * @throws Exception Se si verifica un errore durante il recupero dei dati.
      */
-    public void getIndovinello(String idScenario, SceltaIndovinelloModel model) throws Exception {
+    public void getIndovinello(String idScenario) throws Exception {
         // Chiama l'adapter per ottenere i dati dell'indovinello
-        Map<String, String> indovinelloData = model.getIndovinello(this.idStoria, idScenario);
+        Map<String, String> indovinelloData = sceltaIndovinelloModel.getIndovinello(this.idStoria, idScenario);
         
         // Crea un'istanza di Indovinello
         Indovinello indovinello = new IndovinelloTestuale(
             indovinelloData.get("testo"),
             indovinelloData.get("risposta"));
 
-            // Ottieni gli ID degli scenari corretti ed errati
-            String idScenarioCorretto = indovinelloData.get("prox-scenario-corretto");
-            String idScenarioErrato = indovinelloData.get("prox-scenario-errato");
+        // Ottieni gli ID degli scenari corretti ed errati
+        String idScenarioCorretto = indovinelloData.get("prox-scenario-corretto");
+        String idScenarioErrato = indovinelloData.get("prox-scenario-errato");
 
         // Associa la SceltaIndovinello all'attributo scelte
         this.scelte = new SceltaIndovinello(indovinello, idScenarioCorretto, idScenarioErrato);
@@ -57,12 +63,12 @@ public class Scenario {
      * Recupera l'oggetto da Firebase tramite il SceltaOggettoAdapter e lo associa come SceltaOggetto.
      *
      * @param idScenario L'ID dello scenario.
-     * @param model    L'adapter che gestisce l'accesso ai dati degli oggetti.
+     * @param sceltaOggettoModel    L'adapter che gestisce l'accesso ai dati degli oggetti.
      * @throws Exception Se si verifica un errore durante il recupero dei dati.
      */
-    public void getOggetto(String idScenario, SceltaOggettoModel model) throws Exception {
+    public void getOggetto(String idScenario) throws Exception {
         // Chiama l'adapter per ottenere i dati dell'oggetto
-        Map<String, String> oggettoData = model.getOggetto(this.idStoria, idScenario);
+        Map<String, String> oggettoData = sceltaOggettoModel.getOggetto(this.idStoria, idScenario);
         
         // Ottieni il nome dell'oggetto e gli ID degli scenari collegati
         String nomeOggetto = oggettoData.get("nome-oggetto");

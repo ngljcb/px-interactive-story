@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Story Game</title>
     <link rel="stylesheet" href="/css/game.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
   </head>
   <body>
     <header>
       <nav class="navbar">
-        <div class="brand">Interactive Story</div>
-        <div class="brand">Creazione di una Nuova Storia</div>
+        <div class="brand">
+          <img src="/assets/logo.png" alt="Interactive Story Logo" class="logo" />
+        </div>
         <ul class="menu" id="menu">
-          <li><a href="/index?auth=true">Home</a></li>
+          <li><a id="home-button">Home</a><a id="endgame" href="/index?auth=true">Home</a></li>
         </ul>
       </nav>
     </header>
