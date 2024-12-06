@@ -186,4 +186,12 @@ public class Partita {
     public void setGiocatore(Giocatore giocatore) {
         this.giocatore = giocatore;
     }
+
+    public boolean getStato() {
+        return stato;
+    }
+
+    public void setStoria(Storia storia) {
+        this.storia = storia;
+    }
 }
