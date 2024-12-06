@@ -26,7 +26,7 @@ label {
 input,
 textarea,
 select {
-  width: 100%;
+  width: calc(100% - 1rem);
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
@@ -50,6 +50,7 @@ button:hover {
 
 .scenario-section {
   margin-top: 1rem;
+  margin-bottom: 1rem;
   border: 1px dashed #ccc;
   padding: 1rem;
   border-radius: 5px;

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@SessionAttributes("user") // Associa l'attributo "user" alla sessione
+@SessionAttributes("user")
 @RequestMapping("/session")
 public class SessionController {
 
-    @ModelAttribute("user") // Inizializza l'oggetto Giocatore
+    @ModelAttribute("user")
     public Giocatore setUpUser() {
-        return new Giocatore(); // Crea un'istanza vuota di Giocatore
+        return new Giocatore();
     }
 
     /**
@@ -29,7 +29,7 @@ public class SessionController {
      * @return Messaggio di successo o errore
      */
     @PostMapping("/saveUser")
-    @ResponseBody // Indica che la risposta è testo semplice o JSON
+    @ResponseBody
     public String saveUserToSession(@RequestBody Map<String, String> payload, @ModelAttribute("user") Giocatore user, Model model) {
         String userId = payload.get("userId");
         String email = payload.get("email");
@@ -40,14 +40,10 @@ public class SessionController {
             return "Errore: UID o Token non forniti";
         }
 
-        // Imposta i dati dell'utente
         user.setUid(userId);
         user.setEmail(email);
         user.setNome(username);
-
-        // Salva il token come attributo separato se necessario
         model.addAttribute("idToken", idToken);
-
         return "Utente salvato correttamente nella sessione.";
     }
 
@@ -74,9 +70,9 @@ public class SessionController {
      * @return Messaggio di conferma
      */
     @PostMapping("/logout")
-    @ResponseBody // Indica che la risposta è testo semplice
+    @ResponseBody 
     public String logout(Model model) {
-        model.asMap().clear(); // Rimuove tutti gli attributi dalla sessione
+        model.asMap().clear();
         return "Sessione utente invalidata con successo.";
     }
 }

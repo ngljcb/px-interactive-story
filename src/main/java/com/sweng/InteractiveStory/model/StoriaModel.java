@@ -58,4 +58,84 @@ public class StoriaModel {
         // Converti la lista in un array di stringhe
         return idScenari.toArray(new String[0]);
     }
+
+    /**
+     * Salva una storia e uno scenario nella collezione "SavedStory" sotto un utente, includendo gli oggetti.
+     *
+     * @param userId       L'ID dell'utente.
+     * @param storyId      L'ID della storia da salvare.
+     * @param scenarioId   L'ID dello scenario da salvare.
+     * @param inventory    Array di stringhe rappresentanti gli oggetti nell'inventario.
+     * @throws Exception   In caso di errore durante il salvataggio.
+     */
+    public void saveStory(String userId, String storyId, String scenarioId, String[] inventory) throws Exception {
+        try {
+            String collectionPath = "Utente/" + userId + "/SavedStory";
+            Map<String, Object> savedStoryData = new HashMap<>();
+            savedStoryData.put("storiaId", storyId);
+            savedStoryData.put("scenarioId", scenarioId);
+            if(inventory != null && inventory.length != 0) savedStoryData.put("inventory", inventory);
+
+            // Genera un ID unico per il documento salvato
+            dbManager.addDocumentWithGeneratedId(collectionPath, savedStoryData);
+        } catch (Exception e) {
+            throw new Exception("Errore durante il salvataggio della storia per l'utente: " + userId, e);
+        }
+    }
+
+    /**
+     * Recupera una storia salvata da un utente nella collezione "SavedStory", filtrata per `storiaId`.
+     *
+     * @param userId   L'ID dell'utente.
+     * @param storiaId L'ID della storia da filtrare.
+     * @return Una mappa contenente i dettagli della storia salvata, o null se non trovata.
+     * @throws Exception In caso di errore durante il recupero.
+     */
+    public Map<String, Object> getSavedStory(String userId, String storiaId) throws Exception {
+        try {
+            String collectionPath = "Utente/" + userId + "/SavedStory";
+
+            // Recupera i documenti filtrati per storiaId
+            QuerySnapshot querySnapshot = dbManager.getDocsByCondition(collectionPath, "storiaId", storiaId);
+
+            if (querySnapshot.isEmpty()) {
+                return null; // Ritorna null se non esiste alcun documento con il filtro specificato
+            }
+
+            // Recupera il primo documento trovato (assumendo che sia univoco)
+            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+            Map<String, Object> savedStoryData = new HashMap<>();
+            savedStoryData.put("storiaId", document.getString("storiaId"));
+            savedStoryData.put("scenarioId", document.getString("scenarioId"));
+            savedStoryData.put("inventory", document.get("inventory")); // Ritorna l'array di oggetti
+            return savedStoryData;
+
+        } catch (Exception e) {
+            throw new Exception("Errore durante il recupero della storia salvata per l'utente: " + userId + " e storiaId: " + storiaId, e);
+        }
+    }
+
+    /**
+     * Elimina una storia salvata specifica dalla collezione "SavedStory" di un utente.
+     *
+     * @param userId    L'ID dell'utente.
+     * @param storyId   L'ID della storia da eliminare.
+     * @throws Exception In caso di errore durante l'eliminazione.
+     */
+    public void deleteSavedStory(String userId, String storyId) throws Exception {
+        try {
+            String collectionPath = "Utente/" + userId + "/SavedStory";
+            QuerySnapshot querySnapshot = dbManager.getDocsByCondition(collectionPath, "storiaId", storyId);
+
+            if (!querySnapshot.isEmpty()) {
+                for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                    dbManager.deleteDocument(collectionPath, document.getId());
+                }
+            } else {
+                throw new Exception("Nessuna storia trovata con l'ID: " + storyId);
+            }
+        } catch (Exception e) {
+            throw new Exception("Errore durante l'eliminazione della storia salvata per l'utente: " + userId, e);
+        }
+    }
 }
