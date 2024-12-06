@@ -66,9 +66,8 @@ public class StoryManagerModel {
         return allStoriesData.stream()
                 .map(storyData -> Map.of(
                         "id", storyData.get("id"),
-                        "title", storyData.get("titolo"), 
-                        "description", storyData.get("descrizione") 
-                ))
+                        "title", storyData.get("titolo"),
+                        "description", storyData.get("descrizione")))
                 .collect(Collectors.toList());
     }
 

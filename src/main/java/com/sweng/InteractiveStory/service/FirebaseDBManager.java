@@ -43,6 +43,15 @@ public class FirebaseDBManager {
         return docRef.get().get();
     }
 
+    public QuerySnapshot getDocsByRange(String collection, String field, String startValue, String endValue) throws Exception {
+        return firestore.collection(collection)
+                .orderBy(field)
+                .startAt(startValue)
+                .endAt(endValue)
+                .get()
+                .get();
+    }
+
     /**
      * Recupera una sottocollezione specifica.
      *

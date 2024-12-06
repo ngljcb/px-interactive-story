@@ -30,21 +30,12 @@ public class StoryManager {
      */
     @GetMapping
     public ResponseEntity<List<Map<String, String>>> getStories() {
-        logger.debug("Richiesta per ottenere tutte le storie.");
         try {
-            // Crea un'istanza di StoryManagerModel
             StoryManagerModel storyManagerModel = new StoryManagerModel();
-
-            // Recupera tutte le storie attraverso il model StoryManagerModel
             List<Map<String, String>> allStories = storyManagerModel.getAllStories();
-
-            logger.debug("Numero di storie recuperate: {}", allStories.size());
-
-            // Restituisce le storie come risposta JSON
             return ResponseEntity.ok(allStories);
         } catch (Exception e) {
             logger.error("Errore durante il recupero delle storie.", e);
-            // Restituisce un errore 500 in caso di eccezione
             return ResponseEntity.status(500).body(null);
         }
     }
@@ -56,21 +47,12 @@ public class StoryManager {
      */
     @GetMapping("/{id}")
     public ResponseEntity<List<Map<String, String>>> getStoriesByUser(@PathVariable("id") String userid) {
-        logger.debug("Richiesta per ottenere tutte le storie.");
         try {
-            // Crea un'istanza di StoryManagerModel
             StoryManagerModel storyManagerModel = new StoryManagerModel();
-
-            // Recupera tutte le storie attraverso il model StoryManagerModel
             List<Map<String, String>> allStories = storyManagerModel.getAllStoriesByUser(userid);
-
-            logger.debug("Numero di storie recuperate: {}", allStories.size());
-
-            // Restituisce le storie come risposta JSON
             return ResponseEntity.ok(allStories);
         } catch (Exception e) {
             logger.error("Errore durante il recupero delle storie.", e);
-            // Restituisce un errore 500 in caso di eccezione
             return ResponseEntity.status(500).body(null);
         }
     }
@@ -83,8 +65,6 @@ public class StoryManager {
      */
     @GetMapping("/{id}/modify")
     public ResponseEntity<Map<String, Object>> getStoryById(@PathVariable("id") String storyId) {
-        logger.debug("Richiesta per ottenere la storia con ID: {}", storyId);
-
         try {
             // Istanziazione dei model
             StoriaModel storyModel = new StoriaModel();
@@ -98,7 +78,6 @@ public class StoryManager {
                 logger.warn("Nessuna storia trovata con ID: {}", storyId);
                 return ResponseEntity.status(404).body(null);
             }
-            logger.debug("Storia recuperata: {}", story);
 
             // Recupero gli scenari della storia
             List<Map<String, String>> rawScenarios = scenarioModel.getScenariByStoriaId(storyId);
@@ -108,7 +87,6 @@ public class StoryManager {
             for (Map<String, String> rawScenario : rawScenarios) {
                 scenari.add(new HashMap<>(rawScenario));
             }
-            logger.debug("Numero di scenari recuperati per la storia {}: {}", storyId, scenari.size());
 
             // Iterazione sugli scenari per aggiungere i dettagli specifici
             for (Map<String, Object> scenario : scenari) {
@@ -158,8 +136,6 @@ public class StoryManager {
         try {
             // Crea un'istanza di StoryManagerModel
             StoryManagerModel storyManagerModel = new StoryManagerModel();
-
-            // Elimina la storia utilizzando il metodo deleteStory
             storyManagerModel.deleteStory(idStoria);
 
             logger.debug("Storia con ID {} eliminata con successo.", idStoria);
