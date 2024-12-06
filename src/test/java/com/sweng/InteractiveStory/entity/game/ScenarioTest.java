@@ -2,9 +2,6 @@ package com.sweng.InteractiveStory.entity.game;
 
 import org.junit.jupiter.api.Test;
 
-import com.sweng.InteractiveStory.model.SceltaIndovinelloModel;
-import com.sweng.InteractiveStory.model.SceltaOggettoModel;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScenarioTest {
