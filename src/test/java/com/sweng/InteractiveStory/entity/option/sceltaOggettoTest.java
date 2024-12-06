@@ -76,7 +76,7 @@ void testEseguiConOggetto() {
         SceltaOggetto scelta = new SceltaOggetto("Spada", "scenarioConOggetto", "scenarioSenzaOggetto");
 
         // Verifica che il nome dell'oggetto richiesto sia "Spada"
-        assertEquals("Spada", scelta.getNomeOggetto());
+        assertEquals("Spada", scelta.getNomeOggettoRichiesto());
     }
 
     @Test
@@ -85,7 +85,7 @@ void testEseguiConOggetto() {
         SceltaOggetto scelta = new SceltaOggetto("Spada", "scenarioConOggetto", "scenarioSenzaOggetto");
 
         // Verifica che l'ID dello scenario con oggetto sia "scenarioConOggetto"
-        assertEquals("scenarioConOggetto", scelta.getIdScenarioConOggetto());
+        assertEquals("scenarioConOggetto", scelta.getProssimoScenarioCorretto());
     }
 
     @Test
@@ -94,7 +94,7 @@ void testEseguiConOggetto() {
         SceltaOggetto scelta = new SceltaOggetto("Spada", "scenarioConOggetto", "scenarioSenzaOggetto");
 
         // Verifica che l'ID dello scenario senza oggetto sia "scenarioSenzaOggetto"
-        assertEquals("scenarioSenzaOggetto", scelta.getIdScenarioSenzaOggetto());
+        assertEquals("scenarioSenzaOggetto", scelta.getProssimoScenarioErrato());
     }
 }
 

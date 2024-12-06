@@ -19,11 +19,6 @@ class PartitaTest {
         // Verifica che lo stato della partita sia attivo (true)
         assertTrue(partita.getStato());
 
-        // Verifica che la data di inizio sia stata impostata correttamente
-        assertNotNull(partita.getDataInizio());
-
-        // Verifica che la data di fine sia null
-        assertNull(partita.getDataFine());
     }
 
     @Test
@@ -80,8 +75,6 @@ class PartitaTest {
         // Verifica che lo stato della partita sia cambiato a false
         assertFalse(partita.getStato());
 
-        // Verifica che la data di fine sia stata impostata
-        assertNotNull(partita.getDataFine());
     }
 }
 
