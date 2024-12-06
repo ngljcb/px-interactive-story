@@ -14,10 +14,16 @@ public class Storia {
     private String idscrittore;
     private List<Scenario> scenari;
 
+    private StoriaModel storiaModel;
+    private ScenarioModel scenarioModel;
+
     public Storia() {
         this.titolo = "";
         this.descrizione = "";
         this.scenari = new ArrayList<>();
+
+        storiaModel = new StoriaModel();
+        scenarioModel = new ScenarioModel();
     }
 
     public Storia(String id, String titolo, String descrizione, String idscrittore) {
@@ -26,6 +32,9 @@ public class Storia {
         this.descrizione = descrizione;
         this.idscrittore = idscrittore;
         this.scenari = new ArrayList<>();
+
+        storiaModel = new StoriaModel();
+        scenarioModel = new ScenarioModel();
     }
     
     /**
@@ -35,7 +44,7 @@ public class Storia {
      * @param storiaAdapter L'istanza di StoriaAdapter per ottenere i dettagli della storia.
      * @throws Exception Se si verifica un errore durante il caricamento dei dati.
      */
-    public void getStoria(String idStoria, StoriaModel storiaModel) throws Exception {
+    public void getStoria(String idStoria) throws Exception {
 
         // L'adapter fornisce i dati come mappa
         Map<String, String> dati = storiaModel.getStoria(idStoria);
@@ -54,11 +63,11 @@ public class Storia {
      * @param scenarioModel L'istanza di ScenarioAdapter per ottenere i dettagli degli scenari.
      * @throws Exception Se si verificano errori durante il caricamento.
      */
-    public void getScenari(String idStoria, StoriaModel storiaModel, ScenarioModel scenarioModel) throws Exception {
-        // 1. Ottieni l'elenco degli ID degli scenari associati alla storia
+    public void setScenari(String idStoria) throws Exception {
+        // Ottieni l'elenco degli ID degli scenari associati alla storia
         String[] idScenari = storiaModel.getScenari(idStoria);
 
-        // 2. Per ogni ID dello scenario, ottieni i dettagli e crea un'istanza di Scenario
+        // Per ogni ID dello scenario, ottieni i dettagli e crea un'istanza di Scenario
         for (String idScenario : idScenari) {
             Map<String, String> datiScenario = scenarioModel.getScenario(idStoria, idScenario);
 
@@ -109,7 +118,19 @@ public class Storia {
         return titolo;
     }
 
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     public String getDescrizione() {
         return descrizione;
+    }
+
+    public void setIdScrittore(String idscrittore) {
+        this.idscrittore = idscrittore;
+    }
+
+    public String getIdScrittore() {
+        return idscrittore;
     }
 }

@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Storie Disponibili</title>
     <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
   </head>
   <body>
     <header>
       <nav class="navbar">
-        <div class="brand">Interactive Story</div>
-        <div class="brand">Storie Disponibili</div>
+        <div class="brand">
+          <img src="/assets/logo.png" alt="Interactive Story Logo" class="logo" />
+        </div>
         <ul class="menu" id="menu">
           <li><a href="/settings">Gestione Storie</a></li>
           <li id="login-section">
@@ -19,14 +21,14 @@
         </ul>
       </nav>
     </header>
+    <section class="search-container">
+      <input type="text" id="search-input" placeholder="Cerca una storia per nome..." />
+    </section>
     <main>
       <section id="stories-container" class="stories-container">
         <!-- I box delle storie verranno caricati dinamicamente -->
       </section>
     </main>
-    <footer>
-      <p>&copy; 2024 Interactive Story Platform</p>
-    </footer>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const loginSection = document.getElementById('login-section');

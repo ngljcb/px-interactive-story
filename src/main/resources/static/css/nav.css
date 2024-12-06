@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  color: #333;
+  position: fixed; /* Posizione fissa */
+  top: 0; /* Blocca nella parte superiore */
+  left: 0;
+  width: 100%; /* Occupa tutta la larghezza */
+  z-index: 1000; /* Assicurati che stia sopra gli altri elementi */
+}
+
+.logo {
+  height: 100px; /* Altezza del logo */
+  width: auto; /* Mantieni le proporzioni */
+  margin-right: 10px; /* Spazio tra il logo e il testo (se necessario) */
+}
+
+.navbar .brand {
+  font-size: 1.5rem;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin-right: 50px;
+  padding-bottom: 20px;
+}
+
+.menu li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu li a:hover {
+  text-decoration: underline;
+}
