@@ -77,8 +77,7 @@ The project integrates modern technologies for both frontend and backend:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/ngljcb/InteractiveStory.git
-   cd InteractiveStory
+   git clone https://github.com/ngljcb/px-interactive-story.git
    ```
 
 2. **Initial Setup**:
