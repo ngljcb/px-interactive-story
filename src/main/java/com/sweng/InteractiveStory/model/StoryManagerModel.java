@@ -32,6 +32,8 @@ public class StoryManagerModel {
             storyData.put("titolo", (String) document.get("titolo"));
             storyData.put("descrizione", (String) document.get("descrizione"));
             storyData.put("idscrittore", (String) document.get("user-id"));
+            storyData.put("autore", (String) document.get("autore"));
+            storyData.put("lunghezza", (String) document.get("lunghezza"));
             return storyData;
         }).collect(Collectors.toList());
 
@@ -39,6 +41,8 @@ public class StoryManagerModel {
                 .map(storyData -> Map.of(
                         "id", storyData.get("id"),
                         "title", storyData.get("titolo"), // Rinomina "titolo" in "title"
+                        "author", storyData.get("autore"), // Rinomina "titolo" in "title"
+                        "storylenght", storyData.get("lunghezza"), // Rinomina "titolo" in "title"
                         "description", storyData.get("descrizione") // Rinomina "descrizione" in "description"
                 ))
                 .collect(Collectors.toList());
