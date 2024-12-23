@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const storyContainer = document.getElementById('stories-container');
   const searchInput = document.getElementById('search-input'); // Aggiungi un riferimento all'input di ricerca
+  const authorSelect = document.getElementById('author-select');
+  const lengthSelect = document.getElementById('length-select');
 
   // Funzione per recuperare le storie dal backend
   async function fetchStories() {
@@ -81,9 +83,38 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Funzione per filtrare le storie in base al nome
-  function filterStoriesByName(stories, searchText) {
-    return stories.filter((story) => story.title.toLowerCase().startsWith(searchText.toLowerCase()));
+  // Funzione per popolare il select con gli autori
+  function populateAuthorSelect(stories) {
+    const authors = [...new Set(stories.map((story) => story.author))].filter(Boolean);
+    authorSelect.innerHTML = '<option value="">Filtra per autore</option>';
+    authors.forEach((author) => {
+      const option = document.createElement('option');
+      option.value = author;
+      option.textContent = author;
+      authorSelect.appendChild(option);
+    });
+  }
+
+  // Funzione per popolare il select con le lunghezze
+  function populateLengthSelect(stories) {
+    const lengths = [...new Set(stories.map((story) => story.storylenght))].filter(Boolean);
+    lengthSelect.innerHTML = '<option value="">Filtra per lunghezza</option>';
+    lengths.forEach((length) => {
+      const option = document.createElement('option');
+      option.value = length;
+      option.textContent = length;
+      lengthSelect.appendChild(option);
+    });
+  }
+
+  // Funzione per filtrare le storie in base al nome, all'autore e alla lunghezza
+  function filterStories(stories, searchText, author, length) {
+    return stories.filter((story) => {
+      const matchesName = story.title.toLowerCase().includes(searchText.toLowerCase());
+      const matchesAuthor = author ? story.author === author : true;
+      const matchesLength = length ? story.storylenght === length : true;
+      return matchesName && matchesAuthor && matchesLength;
+    });
   }
 
   try {
@@ -93,14 +124,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Mostra tutte le storie inizialmente
     displayStories(stories);
 
-    // Aggiungi un listener per la ricerca
-    if (searchInput) {
-      searchInput.addEventListener('input', (event) => {
-        const searchText = event.target.value;
-        const filteredStories = filterStoriesByName(stories, searchText);
-        displayStories(filteredStories);
-      });
-    }
+    // Popolare il select con gli autori
+    populateAuthorSelect(stories);
+
+    // Popolare il select con le lunghezze
+    populateLengthSelect(stories);
+
+    const updateStories = () => {
+      const searchText = searchInput.value;
+      const selectedAuthor = authorSelect.value;
+      const selectedLength = lengthSelect.value;
+      const filteredStories = filterStories(stories, searchText, selectedAuthor, selectedLength);
+      displayStories(filteredStories);
+    };
+
+    searchInput.addEventListener('input', updateStories);
+    authorSelect.addEventListener('change', updateStories);
+    lengthSelect.addEventListener('change', updateStories);
   } catch (error) {
     console.error('Errore durante il caricamento delle storie:', error.message);
     storyContainer.innerHTML = `<p>Errore durante il caricamento delle storie. Riprova più tardi.</p>`;
