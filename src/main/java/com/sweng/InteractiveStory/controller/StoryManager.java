@@ -187,6 +187,8 @@ public class StoryManager {
         Map<String, Object> storyMap = Map.of(
             "titolo", titolo,
             "descrizione", descrizione,
+            "autore", userid,
+            "lunghezza", "4",
             "user-id", userid
         );
 
@@ -320,6 +322,8 @@ public class StoryManager {
         logger.debug("Titolo: '{}', Descrizione: '{}'", titolo, descrizione);
 
         Map<String, Object> storyMap = Map.of(
+                "autore", userid,
+                "lunghezza", "4",
                 "user-id", userid,
                 "titolo", titolo,
                 "descrizione", descrizione);
